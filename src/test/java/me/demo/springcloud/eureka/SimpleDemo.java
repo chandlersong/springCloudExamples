@@ -1,6 +1,7 @@
-package me.demo.springcloud.erueka;
+package me.demo.springcloud.eureka;
 
-import me.demo.springcloud.erueka.server.EurekaServerApplication;
+import me.demo.springcloud.eureka.client.EurekaClientApplication;
+import me.demo.springcloud.eureka.server.EurekaServerApplication;
 import me.demo.springcloud.utils.ServerRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,10 +15,10 @@ public class SimpleDemo {
     private Logger logger = LoggerFactory.getLogger(SimpleDemo.class);
 
     @Test
-    public void runSimpleDemo() {
+    public void runSimpleServer() {
         logger.info("simplest demo of eureka,only on eurkea server");
         ServerRunner.createAndRunServer(EurekaServerApplication.class, "simplest_eureka_server.yml");
+        ServerRunner.createAndRunServer(EurekaClientApplication.class, "simplest_eureka_client.yml");
         logger.info("you can add breakpoint here and check server page");
-
     }
 }

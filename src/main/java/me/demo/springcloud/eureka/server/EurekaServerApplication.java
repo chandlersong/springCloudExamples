@@ -1,11 +1,11 @@
-package me.demo.springcloud.erueka.server;
+package me.demo.springcloud.eureka.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("me.demo.springcloud.erueka.server")
+@ComponentScan("me.demo.springcloud.eureka.server")
 @SpringBootApplication
 @EnableEurekaServer
 public class EurekaServerApplication {

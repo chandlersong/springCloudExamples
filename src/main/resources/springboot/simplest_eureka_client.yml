@@ -1,0 +1,11 @@
+server:
+  port: 8762
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: simplest-eureka-client
+  jmx:
+    default-domain: simplest-eureka-client
+
