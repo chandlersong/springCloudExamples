@@ -17,6 +17,7 @@ public class SimpleDemo {
     @Test
     public void runSimpleServer() {
         logger.info("simplest demo of eureka,only on eurkea server");
+        logger.info("server port:{}, client port:{}", "8761", "8762");
         ServerRunner.createAndRunServer(EurekaServerApplication.class, "simplest_eureka_server.yml");
         ServerRunner.createAndRunServer(EurekaClientApplication.class, "simplest_eureka_client.yml");
         logger.info("you can add breakpoint here and check server page");
