@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("me.demo.springcloud.eureka.server")
+@ComponentScan("me.demo.springcloud.eureka.client")
 @SpringBootApplication
 @EnableDiscoveryClient
 public class EurekaClientApplication {
@@ -13,3 +13,6 @@ public class EurekaClientApplication {
         SpringApplication.run(EurekaClientApplication.class, args);
     }
 }
+
+
+
