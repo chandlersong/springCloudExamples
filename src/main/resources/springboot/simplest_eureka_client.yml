@@ -3,6 +3,12 @@ server:
 logging:
   config: classpath:logback.xml
 
+eureka:
+   instance:
+      metadata-map:
+          mykey: customizedValue
+
+
 spring:
   application:
     name: simplest-eureka-client
