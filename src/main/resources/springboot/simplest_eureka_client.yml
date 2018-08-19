@@ -8,6 +8,18 @@ eureka:
       metadata-map:
           mykey: customizedValue
 
+info:
+  app:
+    name: simplest-eureka-client
+    description: this is a very simple eureka client
+    version: 1.0.0
+  java-vendor: ${java.specification.vendor}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 spring:
   application:

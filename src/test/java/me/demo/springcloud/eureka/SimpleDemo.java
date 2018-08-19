@@ -45,8 +45,6 @@ public class SimpleDemo {
         ServerRunner.createAndRunServer(EurekaClientApplication.class, "simplest_eureka_client.yml");
 
         //make sure dynamicMeta will work
-        template.getForEntity(
-                "http://localhost:8762/service-instances/simplest-eureka-client", String.class);
         Thread.sleep(60 * 1000);
 
         Map<String, String> map = new HashMap<>();
@@ -66,7 +64,27 @@ public class SimpleDemo {
         //Assert.assertNotNull(clientInof.getJSONObject("metadata").has("dynamicMeta"));
 
         logger.info("you can add breakpoint here and check server page");
-
     }
 
+
+    @Test
+    public void aboutInfoPage() throws InterruptedException{
+        logger.info("simplest demo of eureka,only on eurkea server");
+        logger.info("server port:{}, client port:{}", "8761", "8762");
+        ServerRunner.createAndRunServer(EurekaServerApplication.class, "simplest_eureka_server.yml");
+        ServerRunner.createAndRunServer(EurekaClientApplication.class, "simplest_eureka_client.yml");
+
+        //make sure dynamicMeta will work
+        Thread.sleep(60 * 1000);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("applicationName", "simplest-eureka-client");
+        ResponseEntity<String> forEntity = template.getForEntity(
+                "http://localhost:8762/actuator/info", String.class);
+
+       logger.info("json:",forEntity.getBody());
+
+
+        logger.info("you can add breakpoint here and check server page");
+    }
 }
