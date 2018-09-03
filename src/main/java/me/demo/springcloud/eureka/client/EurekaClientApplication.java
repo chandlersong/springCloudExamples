@@ -10,6 +10,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Map;
 
+/***
+ * this application is try to guilde how to display instance info
+ *
+ * like how to update info message and meta message
+ */
 @ComponentScan("me.demo.springcloud.eureka.client")
 @SpringBootApplication
 @EnableDiscoveryClient

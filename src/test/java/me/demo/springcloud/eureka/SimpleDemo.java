@@ -66,7 +66,18 @@ public class SimpleDemo {
         logger.info("you can add breakpoint here and check server page");
     }
 
-
+    /**
+     * the Info is use <br>InfoContributor</br> to change info by code
+     * and static is use follow in
+     * info:
+     *   app:
+     *     name: simplest-eureka-client
+     *     description: this is a very simple eureka client
+     *     version: 1.0.0
+     *   java-vendor: ${java.specification.vendor}
+     *   in configuration file
+     * @throws InterruptedException
+     */
     @Test
     public void aboutInfoPage() throws InterruptedException{
         logger.info("simplest demo of eureka,only on eurkea server");
