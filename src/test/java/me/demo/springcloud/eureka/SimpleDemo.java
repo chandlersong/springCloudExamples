@@ -76,7 +76,7 @@ public class SimpleDemo {
      *     version: 1.0.0
      *   java-vendor: ${java.specification.vendor}
      *   in configuration file
-     * @throws InterruptedException
+ 
      */
     @Test
     public void aboutInfoPage() throws InterruptedException{
