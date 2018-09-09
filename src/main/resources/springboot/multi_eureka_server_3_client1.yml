@@ -1,5 +1,5 @@
 server:
-  port: 28762
+  port: 28763
 logging:
   config: classpath:logback.xml
 
@@ -9,7 +9,7 @@ eureka:
       mykey: customizedValue
   client:
     serviceUrl:
-      defaultZone: http://zone2:18762/eureka/
+      defaultZone: http://zone3:18763/eureka/
 info:
   app:
     name: simplest-eureka-client
@@ -27,5 +27,5 @@ spring:
   application:
     name: simplest-eureka-client
   jmx:
-    default-domain: simplest-eureka-client_server_2_client_1
+    default-domain: simplest-eureka-client_server_3_client_1
 

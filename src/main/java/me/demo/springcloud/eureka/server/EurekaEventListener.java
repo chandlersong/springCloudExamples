@@ -3,16 +3,16 @@ package me.demo.springcloud.eureka.server;
 import org.slf4j.Logger;
 import org.springframework.cloud.netflix.eureka.server.event.*;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-
+@Component
 public class EurekaEventListener {
 
     private static final Logger logger = getLogger(EurekaEventListener.class);
 
     @EventListener
-
     public void listen(EurekaInstanceCanceledEvent event) {
         logger.info("EurekaInstanceCanceledEvent was called:id:{},appName{}", event.getServerId(), event.getAppName());
     }

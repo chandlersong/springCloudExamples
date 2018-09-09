@@ -1,16 +1,20 @@
 server:
-  port: 8761
+  port: 18763
 logging:
   .config: classpath:logback.xml
 
 eureka:
+  instance:
+    hostname: zone3
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://zone1:18761/eureka/,http://zone2:18762/eureka/
 
 spring:
   application:
-    name: simplest-eureka-server
+    name: multi-eureka-server
   jmx:
-    default-domain: simplest-eureka-server
+    default-domain: simplest-eureka-server_3
+
+
 
