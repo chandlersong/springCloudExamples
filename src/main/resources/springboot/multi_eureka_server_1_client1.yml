@@ -7,6 +7,7 @@ eureka:
   instance:
     metadata-map:
       mykey: customizedValue
+      zone: zone1
   client:
     serviceUrl:
       defaultZone: http://zone1:18761/eureka/

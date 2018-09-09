@@ -6,6 +6,8 @@ logging:
 eureka:
   instance:
     hostname: zone1
+    metadata-map:
+      zone: zone1
   client:
     serviceUrl:
       defaultZone: http://zone2:18762/eureka/
