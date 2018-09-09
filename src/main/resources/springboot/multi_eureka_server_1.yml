@@ -1,0 +1,18 @@
+server:
+  port: 18761
+logging:
+  .config: classpath:logback.xml
+
+eureka:
+  instance:
+    hostname: zone1
+  client:
+    serviceUrl:
+      defaultZone: http://zone2:18762/eureka/
+
+spring:
+  application:
+    name: multi-eureka-server
+  jmx:
+    default-domain: simplest-eureka-server_1
+

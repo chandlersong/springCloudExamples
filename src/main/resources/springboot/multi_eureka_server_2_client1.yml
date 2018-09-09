@@ -1,0 +1,31 @@
+server:
+  port: 18764
+logging:
+  config: classpath:logback.xml
+
+eureka:
+  instance:
+    metadata-map:
+      mykey: customizedValue
+  client:
+    serviceUrl:
+      defaultZone: http://zone2:18762/eureka/
+info:
+  app:
+    name: simplest-eureka-client
+    description: this is a very simple eureka client
+    version: 1.0.0
+  java-vendor: ${java.specification.vendor}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  application:
+    name: simplest-eureka-client
+  jmx:
+    default-domain: simplest-eureka-client_server_2_client_1
+
