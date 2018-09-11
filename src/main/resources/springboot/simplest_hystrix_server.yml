@@ -1,0 +1,16 @@
+server:
+  port: 8080
+logging:
+  .config: classpath:logback.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'hystrix.stream'
+spring:
+  application:
+    name: simplest-hystrix-server
+  jmx:
+    default-domain: simplest-hystrix-server
+

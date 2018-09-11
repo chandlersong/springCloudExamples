@@ -1,0 +1,17 @@
+server:
+  port: 38756
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: OKService
+  jmx:
+    default-domain: OKService1
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+

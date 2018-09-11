@@ -18,6 +18,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class EurekaServerApplication implements CommandLineRunner {
 
     private static final Logger logger = getLogger(EurekaServerApplication.class);
+
     @Autowired
     private EurekaClient eurekaClient;
 

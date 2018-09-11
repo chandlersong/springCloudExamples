@@ -14,6 +14,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * please
  * 127.0.0.1   zone1
  * 127.0.0.1   zone2
+ * 127.0.0.1   zone3
  * to you host file
  */
 @RunWith(SpringJUnit4ClassRunner.class)
