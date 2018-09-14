@@ -1,0 +1,16 @@
+server:
+  port: 8761
+logging:
+  .config: classpath:logback.xml
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+
+spring:
+  application:
+    name: simplest-eureka-server
+  jmx:
+    default-domain: simplest-eureka-server
+

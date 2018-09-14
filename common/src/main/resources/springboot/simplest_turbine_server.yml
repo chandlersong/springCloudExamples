@@ -1,0 +1,16 @@
+server:
+  port: 18081
+logging:
+  .config: classpath:logback.xml
+
+spring:
+  application:
+    name: simplest-turbine-server
+  jmx:
+    default-domain: simplest-turbine-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://zone1:8761/eureka/
+
