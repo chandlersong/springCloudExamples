@@ -16,11 +16,11 @@ not how to use spring cloud work. just some examples.
 # Extra configuration
 
 ## jmx
-```yml
+```yml 
 spring:
   jmx:
     default-domain: simplest-eureka-client
 ``` 
-Because all the examples run in same jvm, it will 
+Because all the examples run in same jvm, it need define special domain for each application
 
   
