@@ -18,15 +18,11 @@
         </dependency>
         <dependency>
             <groupId>me.study.springcloud</groupId>
+            <artifactId>hystrix-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
             <artifactId>ok-service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>turbine-simple</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>turbine-eureka-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
