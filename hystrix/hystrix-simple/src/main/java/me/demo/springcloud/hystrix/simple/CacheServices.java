@@ -1,4 +1,4 @@
-package me.demo.springcloud.hystrix.cache;
+package me.demo.springcloud.hystrix.simple;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheKey;
@@ -13,7 +13,7 @@ public class CacheServices {
     private Random r = new Random();
 
     @CacheResult
-    @HystrixCommand(commandKey = "commandKey3", fallbackMethod = "fallBackMethod")
+    @HystrixCommand(commandKey = "cacheService", fallbackMethod = "fallBackMethod")
     public User tryCache(@CacheKey String id) {
 
         if (r.nextInt(10) > 5) {

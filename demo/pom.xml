@@ -58,11 +58,6 @@
             </dependency>
             <dependency>
                 <groupId>me.study.springcloud</groupId>
-                <artifactId>hystrix-cache</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
                 <artifactId>ok-service</artifactId>
                 <version>${me.study.springcloud}</version>
             </dependency>

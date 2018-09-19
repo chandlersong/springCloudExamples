@@ -1,4 +1,4 @@
-package me.demo.springcloud.hystrix.cache;
+package me.demo.springcloud.hystrix.simple;
 
 import java.util.Random;
 

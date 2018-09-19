@@ -16,6 +16,7 @@
         <module>turbine-simple</module>
         <module>turbine-eureka-server</module>
         <module>hystrix-cache</module>
+        <module>hystrix-collapsing</module>
     </modules>
 
     <dependencies>

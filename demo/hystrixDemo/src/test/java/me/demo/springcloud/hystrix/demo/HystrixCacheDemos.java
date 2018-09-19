@@ -1,6 +1,6 @@
 package me.demo.springcloud.hystrix.demo;
 
-import me.demo.springcloud.hystrix.cache.HystrixCacheApplication;
+import me.demo.springcloud.hystrix.simple.BasicHystrixApplication;
 import me.demo.springcloud.utils.RestTemplateWrapper;
 import me.demo.springcloud.utils.ServerRunner;
 import org.junit.Test;
@@ -17,13 +17,17 @@ public class HystrixCacheDemos {
 
     private RestTemplateWrapper template = new RestTemplateWrapper();
 
+    /**
+     * Cache is only at one request. if you will call down stream service multi-times, it will reduce some cost
+     */
     @Test
     public void testBasicCache() {
         logger.info("server port:{}", "8080");
-        ServerRunner.createAndRunServer(HystrixCacheApplication.class, "simplest_hystrix_server.yml");
+        ServerRunner.createAndRunServer(BasicHystrixApplication.class, "simplest_hystrix_server.yml");
 
-        for (int i = 0; i < 20; i++) {
-            logger.info("return result:{}!!!", template.doGet("/cache1?id=abc"));
+        for (int i = 0; i < 10; i++) {
+            logger.info("call web services {} times", i);
+            template.doGet("/cache1?id=abc");
         }
         logger.info("ck services down");
         logger.info("stop");
