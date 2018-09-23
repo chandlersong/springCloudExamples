@@ -4,12 +4,13 @@ all the example will try to to use a unit test in demo module. the examples I fo
 application, it's how mico service work. but it's not convenient for beginners.
 
 I will try to use one unit test to show one spring cloud feature. but when you read these examples, please remember it's
-not how to use spring cloud work. just some examples.
+NOT how to use spring cloud. just how to use some feature..
 
 
 # Examples
 
-- [Eureka examples](demo/EurekaDemo/guide.md)
+- [Eureka examples](demo/eurekaDemo/readme.md)
+- [Hystrix examples](demo/hystrixDemo/readme.md)
 
 
 

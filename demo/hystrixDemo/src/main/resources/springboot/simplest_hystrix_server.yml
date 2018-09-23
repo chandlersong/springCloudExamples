@@ -7,7 +7,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: 'hystrix.stream'
+        include:
+        - 'hystrix.stream'
+        - 'info'
 spring:
   application:
     name: simplest-hystrix-server

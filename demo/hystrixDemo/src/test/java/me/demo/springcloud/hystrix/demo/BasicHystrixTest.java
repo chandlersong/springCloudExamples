@@ -1,6 +1,7 @@
 package me.demo.springcloud.hystrix.demo;
 
 
+import me.demo.springcloud.eureka.server.EurekaServerApplication;
 import me.demo.springcloud.hystrix.simple.BasicHystrixApplication;
 import me.demo.springcloud.services.ok.OKServicesApplication;
 import me.demo.springcloud.utils.RestTemplateWrapper;
@@ -22,6 +23,7 @@ public class BasicHystrixTest {
     @Test
     public void testHelloWorld() {
         logger.info("server port:{}", "8080");
+        ServerRunner.createAndRunServer(EurekaServerApplication.class);
         ServerRunner andRunServer = ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1.yml");
         ServerRunner.createAndRunServer(BasicHystrixApplication.class, "simplest_hystrix_server.yml");
 
@@ -37,6 +39,7 @@ public class BasicHystrixTest {
     @Test
     public void testDashBoard() {
         logger.info("server port:{}", "8080");
+        ServerRunner.createAndRunServer(EurekaServerApplication.class);
         ServerRunner andRunServer = ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1.yml");
         ServerRunner.createAndRunServer(BasicHystrixApplication.class, "simplest_hystrix_server.yml");
 
