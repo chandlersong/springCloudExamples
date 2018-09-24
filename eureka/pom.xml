@@ -12,9 +12,9 @@
     <artifactId>eureka</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>simpleEurekaClient</module>
-        <module>lifecycleClient</module>
-        <module>simpleEurekaServer</module>
+        <module>eureka-lifecycle-client</module>
+        <module>simple-eureka-client</module>
+        <module>simple-eureka-server</module>
     </modules>
 
 

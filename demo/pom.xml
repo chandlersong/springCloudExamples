@@ -12,9 +12,9 @@
     <artifactId>demo</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>EurekaDemo</module>
-        <module>hystrixDemo</module>
-        <module>ribbonDemo</module>
+        <module>eureka-demo</module>
+        <module>hystrix-demo</module>
+        <module>ribbon-demo</module>
     </modules>
 
     <build>
@@ -35,7 +35,7 @@
         </dependency>
         <dependency>
             <groupId>me.study.springcloud</groupId>
-            <artifactId>simple-eureka-Server</artifactId>
+            <artifactId>simple-eureka-server</artifactId>
         </dependency>
         <dependency>
             <groupId>me.study.springcloud</groupId>
@@ -43,7 +43,7 @@
         </dependency>
         <dependency>
             <groupId>me.study.springcloud</groupId>
-            <artifactId>eureka-life-cycle-client</artifactId>
+            <artifactId>eureka-lifecycle-client</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -55,7 +55,7 @@
             </dependency>
             <dependency>
                 <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-eureka-Server</artifactId>
+                <artifactId>simple-eureka-server</artifactId>
                 <version>${me.study.springcloud}</version>
             </dependency>
             <dependency>
@@ -65,7 +65,7 @@
             </dependency>
             <dependency>
                 <groupId>me.study.springcloud</groupId>
-                <artifactId>eureka-life-cycle-client</artifactId>
+                <artifactId>eureka-lifecycle-client</artifactId>
                 <version>${me.study.springcloud}</version>
             </dependency>
             <dependency>
