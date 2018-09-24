@@ -52,10 +52,6 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="demo"/>
     </logger>
-    <logger name="me.study" level="debug" additivity="false">
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="demo"/>
-    </logger>
     <root level="info">
         <appender-ref ref="thirdPartyWarn"/>
         <appender-ref ref="thirdparty"/>

@@ -14,8 +14,19 @@
     <modules>
         <module>EurekaDemo</module>
         <module>hystrixDemo</module>
-        <module>ribbon-demo</module>
+        <module>ribbonDemo</module>
     </modules>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/logback</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources/springboot</directory>
+            </resource>
+        </resources>
+    </build>
 
     <dependencies>
         <dependency>
@@ -37,6 +48,11 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>ribbon-simple</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
             <dependency>
                 <groupId>me.study.springcloud</groupId>
                 <artifactId>simple-eureka-Server</artifactId>

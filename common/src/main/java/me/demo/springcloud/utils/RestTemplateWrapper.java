@@ -26,7 +26,7 @@ public class RestTemplateWrapper {
 
     public String doGet(String path) {
         String callPath = String.format(pathFormat, path);
-        logger.debug("path {}", callPath);
+        logger.trace("path {}", callPath);
         return restTemplate.getForEntity(callPath, String.class).getBody();
     }
 

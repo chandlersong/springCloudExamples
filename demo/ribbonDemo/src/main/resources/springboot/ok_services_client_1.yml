@@ -1,20 +1,17 @@
 server:
-  port: 38756
+  port: 8081
 logging:
   config: classpath:logback.xml
 
 spring:
   application:
-    name: OKService
+    name: ok-service
   jmx:
     default-domain: OKService_client2
 
-
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
+    enabled: false
 
 ok-service-meta:
   clientId: client1
