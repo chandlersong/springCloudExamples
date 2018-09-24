@@ -4,6 +4,7 @@ import me.demo.springcloud.services.ok.OKServicesApplication;
 import me.demo.springcloud.utils.MulitAssert;
 import me.demo.springcloud.utils.RestTemplateWrapper;
 import me.demo.springcloud.utils.ServerRunner;
+import me.study.springcloud.eureka.server.EurekaServerApplication;
 import me.study.springcloud.ribbon.RibbonSimpleApplication;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,16 +24,38 @@ public class SimpleRibbonDemo {
     private RestTemplateWrapper template = new RestTemplateWrapper();
 
     @Test
-    public void runHelloWorldStatic() {
+    public void runExampleWithOutEureka() {
 
-        ServerRunner.createAndRunServer(RibbonSimpleApplication.class, "simple_static_ribbon_service.yml"); // it must be the first to start
+        ServerRunner.createAndRunServer(RibbonSimpleApplication.class, "simple_ribbon_service_without_eureka.yml"); // it must be the first to start
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_without_eureka_1.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_without_eureka_2.yml");
+
+
+        MulitAssert.assertMulitpleTimes(100, o -> Assert.assertThat(template.doGet("/hi"), anyOf(is("client1"), is("client2"))));
+        logger.info("stop");
+
+    }
+
+
+    /**
+     * the url in the ribbon client should be same as server id.
+     * in this example:
+     * the url is http://ok-service/say
+     * and the server in eureka should be ok-service
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void runExampleWithEureka() throws InterruptedException {
+
+        ServerRunner.createAndRunServer(EurekaServerApplication.class);
+        ServerRunner.createAndRunServer(RibbonSimpleApplication.class, "simple_ribbon_service.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_2.yml");
 
 
-        MulitAssert.assertMulitpleTimes(100, o -> {
-            Assert.assertThat(template.doGet("/hi"), anyOf(is("client1"), is("client2")));
-        });
+        Thread.sleep(60 * 1000);
+        MulitAssert.assertMulitpleTimes(100, o -> Assert.assertThat(template.doGet("/hi"), anyOf(is("client1"), is("client2"))));
         logger.info("stop");
 
     }

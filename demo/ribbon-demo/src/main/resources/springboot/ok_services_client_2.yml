@@ -7,11 +7,7 @@ spring:
   application:
     name: ok-service
   jmx:
-    default-domain: OKService_client1
-
-eureka:
-  client:
-    enabled: false
+    default-domain: OKService_client2
 
 ok-service-meta:
   clientId: client2
