@@ -9,8 +9,8 @@ NOT how to use spring cloud. just how to use some feature..
 
 # Examples
 
-- [Eureka examples](demo/eurekaDemo/readme.md)
-- [Hystrix examples](demo/hystrixDemo/readme.md)
+- [Eureka examples](demo/eureka-demo/README.md)
+- [Hystrix examples](demo/hystrix-demo/README.md)
 
 
 
