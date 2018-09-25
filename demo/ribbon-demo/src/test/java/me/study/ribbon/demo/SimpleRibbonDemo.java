@@ -61,4 +61,27 @@ public class SimpleRibbonDemo {
     }
 
 
+    /**
+     * this case seems not working.Because retry not support  connection refuse
+     * https://github.com/spring-cloud/spring-cloud-netflix/issues/2927
+     *
+     * @throws InterruptedException
+     */
+    public void runExampleWithEurekaAndOneDwon() throws InterruptedException {
+
+        ServerRunner.createAndRunServer(EurekaServerApplication.class);
+        ServerRunner.createAndRunServer(RibbonSimpleApplication.class, "simple_ribbon_service.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1.yml");
+        ServerRunner okServer2 = ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_2.yml");
+
+
+        Thread.sleep(60 * 1000);
+        MulitAssert.assertMulitpleTimes(100, o -> Assert.assertThat(template.doGet("/hi"), anyOf(is("client1"), is("client2"))));
+
+        okServer2.stop();
+        MulitAssert.assertMulitpleTimes(100, o -> Assert.assertEquals("client1", template.doGet("/hi")));
+
+        logger.info("stop");
+
+    }
 }
