@@ -11,6 +11,7 @@ NOT how to use spring cloud. just how to use some feature..
 
 - [Eureka examples](demo/eureka-demo/README.md)
 - [Hystrix examples](demo/hystrix-demo/README.md)
+- [Ribbon examples](demo/ribbon-demo/README.md)
 
 
 
