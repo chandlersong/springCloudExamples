@@ -6,6 +6,7 @@ application, it's how mico service work. but it's not convenient for beginners.
 I will try to use one unit test to show one spring cloud feature. but when you read these examples, please remember it's
 NOT how to use spring cloud. just how to use some feature..
 
+when you build the project, please use **mvn install -DskipTests**
 
 # Examples
 

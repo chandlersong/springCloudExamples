@@ -67,7 +67,7 @@ public class SimpleRibbonDemo {
      *
      * @throws InterruptedException
      */
-    public void runExampleWithEurekaAndOneDwon() throws InterruptedException {
+    public void runExampleWithEurekaAndOneDown() throws InterruptedException {
 
         ServerRunner.createAndRunServer(EurekaServerApplication.class);
         ServerRunner.createAndRunServer(RibbonSimpleApplication.class, "simple_ribbon_service.yml");

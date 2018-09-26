@@ -14,6 +14,7 @@
         <module>demo</module>
         <module>services</module>
         <module>ribbon</module>
+        <module>zuul</module>
     </modules>
     <packaging>pom</packaging>
 

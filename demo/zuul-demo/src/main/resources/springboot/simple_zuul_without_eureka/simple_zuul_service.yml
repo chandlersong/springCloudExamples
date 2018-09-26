@@ -1,0 +1,20 @@
+server:
+  port: 8080
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: simple_zuul_witout_eureka
+  jmx:
+    default-domain: simple_zuul_witout_eureka
+
+zuul:
+  routes:
+    demos:
+      path: /demo/**
+      url: http://localhost:8081/
+
+eureka:
+  client:
+    enabled: false
