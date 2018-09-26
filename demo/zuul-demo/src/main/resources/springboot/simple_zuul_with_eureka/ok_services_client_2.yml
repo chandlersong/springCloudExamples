@@ -1,0 +1,13 @@
+server:
+  port: 8082
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: ok-service
+  jmx:
+    default-domain: OKService_client2
+
+ok-service-meta:
+  clientId: client2

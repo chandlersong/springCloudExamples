@@ -13,8 +13,4 @@ zuul:
   routes:
     demos:
       path: /demo/**
-      url: http://localhost:8081/
-
-eureka:
-  client:
-    enabled: false
+      serviceId: ok-service
