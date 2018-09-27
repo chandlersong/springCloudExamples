@@ -10,6 +10,9 @@ spring:
     default-domain: simple_zuul_witout_eureka
 
 zuul:
+  ribbon:
+    eager-load:
+      enabled: true
   routes:
     demos:
       path: /demo/**

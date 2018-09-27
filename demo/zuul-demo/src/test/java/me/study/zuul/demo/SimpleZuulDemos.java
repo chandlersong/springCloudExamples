@@ -40,7 +40,6 @@ public class SimpleZuulDemos {
         ServerRunner.createAndRunServer(OKServicesApplication.class, "simple_zuul_with_eureka/ok_services_client_1.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "simple_zuul_with_eureka/ok_services_client_2.yml");
 
-
         Thread.sleep(60 * 1000);
         MulitAssert.assertMulitpleTimes(100, o -> Assert.assertThat(template.doGet("/demo/say"), anyOf(is("client1"), is("client2"))));
         logger.info("stop");

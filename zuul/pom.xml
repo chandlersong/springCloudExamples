@@ -15,6 +15,7 @@
         <module>simple-zuul-server</module>
     </modules>
 
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
