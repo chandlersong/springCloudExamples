@@ -1,0 +1,28 @@
+server:
+  port: 8080
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: simple_zuul_witout_eureka
+  jmx:
+    default-domain: simple_zuul_witout_eureka
+
+eureka:
+  client:
+    enabled: false
+
+
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    # 1. if to-service-2 is after  to-service-1, it won't work,/demo/abc/  will go to to-service-1
+    to-service-2:
+      path: /demo/abc/**
+      url: http://localhost:8082/
+    to-service-1:
+      path: /demo/**
+      url: http://localhost:8081/

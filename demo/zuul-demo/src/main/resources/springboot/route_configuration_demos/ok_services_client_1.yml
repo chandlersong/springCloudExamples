@@ -1,0 +1,17 @@
+server:
+  port: 8081
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: ok-service-1
+  jmx:
+    default-domain: OKService_client1
+
+eureka:
+  client:
+    enabled: false
+
+ok-service-meta:
+  clientId: client1
