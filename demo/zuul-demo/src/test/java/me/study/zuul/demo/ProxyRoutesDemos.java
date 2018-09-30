@@ -2,6 +2,7 @@ package me.study.zuul.demo;
 
 import me.demo.springcloud.utils.RestTemplateWrapper;
 import me.demo.springcloud.utils.ServerRunner;
+import me.study.springcloud.eureka.server.EurekaServerApplication;
 import me.study.springcloud.services.ok.OKServicesApplication;
 import me.study.zuul.SimpleZuulApplication;
 import org.junit.Assert;
@@ -26,7 +27,7 @@ public class ProxyRoutesDemos {
      *    /X/client3/say
      */
     @Test
-    public void runExampleWithEureka() {
+    public void runConfigurationFile() {
 
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "route_configuration_demos/simple_zuul_service.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_1.yml");
@@ -35,6 +36,26 @@ public class ProxyRoutesDemos {
 
         Assert.assertThat(template.doGet("/demo/say"), is("client1"));
         Assert.assertThat(template.doGet("/demo/abc/say"), is("client2"));
+        logger.info("stop");
+
+    }
+
+    /**
+     * 1. the configuration in above will override those after
+     * 2. in the configuration, the  to-service-3, the request will be route the client3 ,but client 3 will receive
+     * /X/client3/say
+     */
+    @Test
+    public void runPatternServiceRouteMapper() throws InterruptedException {
+
+        ServerRunner.createAndRunServer(EurekaServerApplication.class);
+        ServerRunner.createAndRunServer(SimpleZuulApplication.class, "pattern_service_route_mapper/simple_zuul_service.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "pattern_service_route_mapper/ok_services_client_1.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "pattern_service_route_mapper/ok_services_client_2.yml");
+
+        Thread.sleep(60 * 1000);
+        Assert.assertThat(template.doGet("/client1/say"), is("client1"));
+        Assert.assertThat(template.doGet("/client2/say"), is("client2"));
         logger.info("stop");
 
     }

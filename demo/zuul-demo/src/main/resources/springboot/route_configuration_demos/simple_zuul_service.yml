@@ -19,7 +19,6 @@ zuul:
     eager-load:
       enabled: true
   routes:
-    # 1. if to-service-2 is after  to-service-1, it won't work,/demo/abc/  will go to to-service-1
     to-service-3:
       path: /demo/*/client3/**
       url: http://localhost:8083/

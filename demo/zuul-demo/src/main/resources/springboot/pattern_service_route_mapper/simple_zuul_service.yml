@@ -1,0 +1,20 @@
+server:
+  port: 8080
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: simple_zuul_witout_eureka
+  jmx:
+    default-domain: simple_zuul_witout_eureka
+
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    client1:
+      serviceId: ok_client1
+    client2:
+      serviceId: ok_client2
