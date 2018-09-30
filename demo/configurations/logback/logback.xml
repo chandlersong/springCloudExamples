@@ -48,6 +48,10 @@
         </filter>
     </appender>
 
+    <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="debug">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
     <logger name="me.demo" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="demo"/>

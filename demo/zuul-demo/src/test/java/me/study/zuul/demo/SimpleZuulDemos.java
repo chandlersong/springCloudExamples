@@ -1,10 +1,10 @@
 package me.study.zuul.demo;
 
-import me.demo.springcloud.services.ok.OKServicesApplication;
 import me.demo.springcloud.utils.MulitAssert;
 import me.demo.springcloud.utils.RestTemplateWrapper;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.eureka.server.EurekaServerApplication;
+import me.study.springcloud.services.ok.OKServicesApplication;
 import me.study.zuul.SimpleZuulApplication;
 import org.junit.Assert;
 import org.junit.Test;

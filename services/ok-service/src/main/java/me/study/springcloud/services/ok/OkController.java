@@ -1,4 +1,4 @@
-package me.demo.springcloud.services.ok;
+package me.study.springcloud.services.ok;
 
 
 import org.slf4j.Logger;

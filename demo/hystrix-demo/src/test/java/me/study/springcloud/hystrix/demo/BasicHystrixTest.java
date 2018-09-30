@@ -1,12 +1,11 @@
 package me.study.springcloud.hystrix.demo;
 
 
-
 import me.demo.springcloud.hystrix.simple.BasicHystrixApplication;
-import me.demo.springcloud.services.ok.OKServicesApplication;
 import me.demo.springcloud.utils.RestTemplateWrapper;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.eureka.server.EurekaServerApplication;
+import me.study.springcloud.services.ok.OKServicesApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
