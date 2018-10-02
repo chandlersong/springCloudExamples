@@ -33,7 +33,7 @@ public class SimpleZuulDemos {
     }
 
     @Test
-    public void runExampleWithEureka() throws InterruptedException {
+    public void runFullBackProvider() throws InterruptedException {
 
         ServerRunner.createAndRunServer(EurekaServerApplication.class);
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "simple_zuul_with_eureka/simple_zuul_service.yml");
