@@ -24,7 +24,7 @@ public class ProxyRoutesDemos {
     /**
      * 1. the configuration in above will override those after
      * 2. in the configuration, the  to-service-3, the request will be route the client3 ,but client 3 will receive
-     *    /X/client3/say
+     * /X/client3/say
      */
     @Test
     public void runConfigurationFile() {
@@ -56,6 +56,20 @@ public class ProxyRoutesDemos {
         Thread.sleep(60 * 1000);
         Assert.assertThat(template.doGet("/client1/say"), is("client1"));
         Assert.assertThat(template.doGet("/client2/say"), is("client2"));
+        logger.info("stop");
+
+    }
+
+    @Test
+    public void runIgnoreExamples() {
+
+        ServerRunner.createAndRunServer(SimpleZuulApplication.class, "route_configuration_demos/simple_zuul_service.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_1.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_2.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_3.yml");
+
+        Assert.assertThat(template.doGet("/demo/say"), is("client1"));
+        Assert.assertThat(template.doGet("/demo/zuul/say"), is("zuul"));
         logger.info("stop");
 
     }
