@@ -12,7 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import java.io.ByteArrayInputStream;
@@ -30,12 +29,6 @@ public class SimpleZuulApplication {
         new SpringApplicationBuilder(SimpleZuulApplication.class).run(args);
     }
 
-    @RequestMapping("/timeout")
-    public String timeout() throws InterruptedException {
-        Thread.sleep(80000);
-        return "timeout";
-    }
-
 
     @Bean
     public CommonsRequestLoggingFilter logFilter() {
@@ -47,6 +40,11 @@ public class SimpleZuulApplication {
         filter.setIncludeHeaders(false);
         filter.setAfterMessagePrefix("receive request: simple zuul server");
         return filter;
+    }
+
+    @Bean
+    public ZuulController createZuulContorl() {
+        return new ZuulController();
     }
 
     @Bean

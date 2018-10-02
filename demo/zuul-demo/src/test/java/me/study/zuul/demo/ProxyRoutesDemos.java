@@ -61,15 +61,14 @@ public class ProxyRoutesDemos {
     }
 
     @Test
-    public void runFallBack() {
+    public void runFallBack() throws InterruptedException {
 
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "route_configuration_demos/simple_zuul_service_with_ribbon_hystrix.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_1.yml");
-        ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_2.yml");
-        ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_3.yml");
 
+        Thread.sleep(60 * 1000);
         Assert.assertThat(template.doGet("/demo/say"), is("client1"));
-        Assert.assertThat(template.doGet("/demo/123"), is("fallback"));
+        Assert.assertThat(template.doGet("/demo/abc/123"), is("fallback"));
         logger.info("stop");
 
     }
