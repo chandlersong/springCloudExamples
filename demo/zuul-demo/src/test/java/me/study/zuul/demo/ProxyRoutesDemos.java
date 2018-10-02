@@ -60,6 +60,11 @@ public class ProxyRoutesDemos {
 
     }
 
+    /**
+     * FallbackProvider only work for timeout and connection refuse,Because backend is use http Client
+     *
+     * @throws InterruptedException
+     */
     @Test
     public void runFallBack() throws InterruptedException {
 
