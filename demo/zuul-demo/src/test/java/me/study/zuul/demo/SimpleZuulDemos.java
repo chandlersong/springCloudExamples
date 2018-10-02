@@ -24,7 +24,7 @@ public class SimpleZuulDemos {
     private RestTemplateWrapper template = new RestTemplateWrapper();
 
     @Test
-    public void testRunZuulWithoutEureka() {
+    public void runZuulWithoutEureka() {
         logger.info("run zuul example without Eureka");
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "simple_zuul_without_eureka/simple_zuul_service.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "simple_zuul_without_eureka/ok_services_client_without_eureka_1.yml");
@@ -33,7 +33,7 @@ public class SimpleZuulDemos {
     }
 
     @Test
-    public void runFullBackProvider() throws InterruptedException {
+    public void runZuulWithEureka() throws InterruptedException {
 
         ServerRunner.createAndRunServer(EurekaServerApplication.class);
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "simple_zuul_with_eureka/simple_zuul_service.yml");
