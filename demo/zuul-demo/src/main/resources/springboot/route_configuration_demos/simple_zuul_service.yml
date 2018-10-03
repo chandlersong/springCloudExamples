@@ -3,9 +3,14 @@ server:
 logging:
   config: classpath:logback.xml
 
+
 management:
-  server:
-    port: 8888
+  endpoints:
+    web:
+      exposure:
+        include:
+        - info
+        - routes
 
 spring:
   application:
@@ -22,6 +27,9 @@ zuul:
     eager-load:
       enabled: true
   routes:
+    to-zuul:
+      path: /tozuul/**
+      url: forward:/examples
     to-service-3:
       path: /demo/*/client3/**
       url: http://localhost:8083/
@@ -31,5 +39,6 @@ zuul:
     to-service-1:
       path: /demo/**
       url: http://localhost:8081/
+
 
 

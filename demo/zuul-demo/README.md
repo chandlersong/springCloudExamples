@@ -6,3 +6,4 @@ examples run zuul with and without Eureka
 - how to configuration path in configuration file 
 - *PatternServiceRouteMapper* examples
 - fallback examples
+- add forward examples

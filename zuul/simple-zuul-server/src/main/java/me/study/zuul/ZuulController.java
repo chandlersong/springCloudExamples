@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ZuulController {
 
-    @RequestMapping(value = "/timeout")
+    @RequestMapping(value = "/examples/tozuul")
     public String sayOk() {
         return "zuul";
     }

@@ -77,4 +77,18 @@ public class ProxyRoutesDemos {
         logger.info("stop");
 
     }
+
+    /**
+     * local path is /examples/tozuul
+     */
+    @Test
+    public void runForward() {
+
+        ServerRunner.createAndRunServer(SimpleZuulApplication.class, "route_configuration_demos/simple_zuul_service.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_1.yml");
+
+        Assert.assertThat(template.doGet("/tozuul"), is("zuul"));
+        logger.info("stop");
+
+    }
 }
