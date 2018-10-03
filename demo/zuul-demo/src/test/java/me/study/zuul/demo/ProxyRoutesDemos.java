@@ -87,7 +87,8 @@ public class ProxyRoutesDemos {
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "route_configuration_demos/simple_zuul_service.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "route_configuration_demos/ok_services_client_1.yml");
 
-        Assert.assertThat(template.doGet("/tozuul"), is("zuul"));
+        Assert.assertThat(template.doGet("/tozuul/tozuul"), is("zuul"));
+        Assert.assertThat(template.doGet("/tozuul2"), is("zuul2"));
         logger.info("stop");
 
     }

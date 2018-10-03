@@ -11,4 +11,9 @@ public class ZuulController {
     public String sayOk() {
         return "zuul";
     }
+
+    @RequestMapping(value = "/examples/tozuul2")
+    public String sayOk2() {
+        return "zuul2";
+    }
 }

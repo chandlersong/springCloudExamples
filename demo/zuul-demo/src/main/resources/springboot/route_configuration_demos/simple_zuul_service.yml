@@ -30,6 +30,9 @@ zuul:
     to-zuul:
       path: /tozuul/**
       url: forward:/examples
+    to-zuul2:
+      path: /tozuul2
+      url: forward:/examples
     to-service-3:
       path: /demo/*/client3/**
       url: http://localhost:8083/
