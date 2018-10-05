@@ -15,6 +15,7 @@
         <module>services</module>
         <module>ribbon</module>
         <module>zuul</module>
+        <module>feign</module>
     </modules>
     <packaging>pom</packaging>
 

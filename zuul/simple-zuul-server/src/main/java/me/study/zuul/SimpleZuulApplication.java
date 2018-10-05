@@ -43,8 +43,14 @@ public class SimpleZuulApplication {
     }
 
     @Bean
-    public ZuulController createZuulContorl() {
+    public ZuulController createZuulController() {
         return new ZuulController();
+    }
+
+
+    @Bean
+    public AddResponseHeaderFilter createFilter() {
+        return new AddResponseHeaderFilter();
     }
 
     @Bean

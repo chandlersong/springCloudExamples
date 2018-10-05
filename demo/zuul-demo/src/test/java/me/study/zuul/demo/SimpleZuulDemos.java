@@ -28,7 +28,7 @@ public class SimpleZuulDemos {
         logger.info("run zuul example without Eureka");
         ServerRunner.createAndRunServer(SimpleZuulApplication.class, "simple_zuul_without_eureka/simple_zuul_service.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "simple_zuul_without_eureka/ok_services_client_without_eureka_1.yml");
-
+        MulitAssert.assertMulitpleTimes(100, o -> Assert.assertThat(template.doGet("/demo/say"), is("client1")));
         Assert.assertEquals("client1", template.doGet("/demo/say"));
     }
 
