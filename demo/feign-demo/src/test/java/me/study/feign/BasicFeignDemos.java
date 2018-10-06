@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package me.study.feign;
 
 import me.demo.springcloud.utils.RestRequest;
@@ -24,6 +32,8 @@ public class BasicFeignDemos {
         ServerRunner.createAndRunServer(EurekaServerApplication.class);
         ServerRunner.createAndRunServer(SimpleFeignApplication.class, "simple_feign_server.yml");
         ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1.yml");
+
+
 
         Thread.sleep(35 * 1000);
         Assert.assertEquals("client1",RestRequest.get("/sayHi"));
