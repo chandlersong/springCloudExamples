@@ -16,6 +16,7 @@
         <module>hystrix-demo</module>
         <module>ribbon-demo</module>
         <module>zuul-demo</module>
+        <module>feign-demo</module>
     </modules>
 
     <build>
@@ -92,6 +93,11 @@
             <dependency>
                 <groupId>me.study.springcloud</groupId>
                 <artifactId>turbine-simple</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>simple-feign-server</artifactId>
                 <version>${me.study.springcloud}</version>
             </dependency>
             <dependency>
