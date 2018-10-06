@@ -1,7 +1,11 @@
+
+
 /*
  * Copyright (c) 2018
- * @Author:chandler@yeah.net
- * @LastModified:2018-10-06T21:40:28.026+08:00
+ * @Author:chandler song, email:chandler605@outlook.com
+ * @LastModified:2018-10-06T21:45:27.678+08:00
+ * LGPL licence
+ *
  */
 
 package me.study.feign;
