@@ -14,6 +14,7 @@ when you build the project, please use **mvn install -DskipTests**
 - [Hystrix examples](demo/hystrix-demo/README.md)
 - [Ribbon examples](demo/ribbon-demo/README.md)
 - [Zuul examples](demo/zuul-demo/README.md)
+- [Zuul examples](demo/feign-demo/README.md)
 
 
 
