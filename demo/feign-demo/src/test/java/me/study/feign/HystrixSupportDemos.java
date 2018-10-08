@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-08T22:01:01.736+08:00
+ * @LastModified:2018-10-08T22:12:54.950+08:00
  * LGPL licence
  *
  */
@@ -38,6 +38,16 @@ public class HystrixSupportDemos {
 
 
         Assert.assertEquals("client1", RestRequest.get("/hystrix_observable"));
+        logger.info("stop");
+    }
+
+    @Test
+    public void testReturnFallBack() {
+        logger.info("server port:{}", "8080");
+
+        ServerRunner.createAndRunServer(HystrixFeignApplication.class, "hystrix_feign_server.yml");
+        Assert.assertEquals("fallback", RestRequest.get("/hystrix_observable"));
+        Assert.assertEquals("fallback", RestRequest.get("/hystrix_say"));
         logger.info("stop");
     }
 
