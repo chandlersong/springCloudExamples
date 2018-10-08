@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-08T21:24:50.824+08:00
+ * @LastModified:2018-10-08T22:01:01.736+08:00
  * LGPL licence
  *
  */
@@ -23,14 +23,26 @@ public class HystrixSupportDemos {
     private static final Logger logger = getLogger(HystrixSupportDemos.class);
 
     @Test
-    public void testReturnFuture() {
+    public void testReturnCommand() {
         logger.info("server port:{}", "8080");
-        ServerRunner.createAndRunServer(HystrixFeignApplication.class, "hystrix_feign_server.yml");
-        ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1_without_eureka.yml");
-
-
+        startTestServer();
 
         Assert.assertEquals("client1", RestRequest.get("/hystrix_say"));
         logger.info("stop");
+    }
+
+    @Test
+    public void testReturnObservable() {
+        logger.info("server port:{}", "8080");
+        startTestServer();
+
+
+        Assert.assertEquals("client1", RestRequest.get("/hystrix_observable"));
+        logger.info("stop");
+    }
+
+    private void startTestServer() {
+        ServerRunner.createAndRunServer(HystrixFeignApplication.class, "hystrix_feign_server.yml");
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "ok_services_client_1_without_eureka.yml");
     }
 }

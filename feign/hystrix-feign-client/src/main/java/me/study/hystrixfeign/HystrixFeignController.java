@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-08T18:39:24.139+08:00
+ * @LastModified:2018-10-08T22:01:01.743+08:00
  * LGPL licence
  *
  */
@@ -22,6 +22,11 @@ public class HystrixFeignController {
     @RequestMapping(method = RequestMethod.GET, value = "/hystrix_say")
     public String normalSay(){
         return feignOkServices.sayHi().execute();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/hystrix_observable")
+    public String normalObservable() {
+        return feignOkServices.sayHiObservable().toBlocking().single();
     }
 
 
