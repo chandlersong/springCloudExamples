@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-08T18:39:01.910+08:00
+ * @LastModified:2018-10-08T21:24:50.824+08:00
  * LGPL licence
  *
  */
@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.concurrent.Future;
-
-@FeignClient("${simple-feign-meta.okService:OKService}")
+@FeignClient(name = "okService", url = "${feign-meta.url:http://localhost:8081}")
 @Component
 public interface FeignOkServices {
 

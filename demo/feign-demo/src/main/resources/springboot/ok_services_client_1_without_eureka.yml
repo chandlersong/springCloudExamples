@@ -12,9 +12,7 @@ spring:
 
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
+    enabled: false
 
 ok-service-meta:
   clientId: client1

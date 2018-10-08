@@ -15,8 +15,9 @@ feign:
 
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+    enabled: false
 
-simple-feign-meta:
+
+feign-meta:
   okService: OKService
+  url: http://localhost:8081
