@@ -1,0 +1,22 @@
+server:
+  port: 8080
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: hystrix_feign_server
+  jmx:
+    default-domain: hystrix_feign_server
+
+feign:
+  hystrix:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+simple-feign-meta:
+  okService: OKService
