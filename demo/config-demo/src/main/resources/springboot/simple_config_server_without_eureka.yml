@@ -1,0 +1,21 @@
+server:
+  port: 8080
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: simple_config_server
+  jmx:
+    default-domain: simple_config_server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+
+eureka:
+  client:
+    enabled: false
+
+

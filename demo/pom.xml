@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2018
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-10-08T18:39:01.889+08:00
+  ~ @LastModified:2018-10-11T00:00:57.629+08:00
   ~ LGPL licence
   ~
   -->
@@ -25,6 +25,7 @@
         <module>ribbon-demo</module>
         <module>zuul-demo</module>
         <module>feign-demo</module>
+        <module>config-demo</module>
     </modules>
 
     <build>
@@ -58,6 +59,16 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>simple-config-server</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>simple-config-client</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
             <dependency>
                 <groupId>me.study.springcloud</groupId>
                 <artifactId>zuul</artifactId>

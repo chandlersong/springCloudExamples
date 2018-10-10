@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018
+  ~ @Author:chandler song, email:chandler605@outlook.com
+  ~ @LastModified:2018-10-11T00:00:57.643+08:00
+  ~ LGPL licence
+  ~
+  -->
+
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -16,6 +24,7 @@
         <module>ribbon</module>
         <module>zuul</module>
         <module>feign</module>
+        <module>config</module>
     </modules>
     <packaging>pom</packaging>
 

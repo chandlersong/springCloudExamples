@@ -1,0 +1,9 @@
+spring:
+  jmx:
+    default-domain: simple_config_client1
+
+eureka:
+  client:
+    enabled: false
+
+
