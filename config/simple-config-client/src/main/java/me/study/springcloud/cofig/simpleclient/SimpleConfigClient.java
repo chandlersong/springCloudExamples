@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-11T00:00:57.629+08:00
+ * @LastModified:2018-10-11T06:52:46.888+08:00
  * LGPL licence
  *
  */
@@ -29,7 +29,7 @@ public class SimpleConfigClient {
         return value;
     }
 
-    @Value("${bar:nonLoad}")
+    @Value("${test-value:nonLoad}")
     public void setValue(String value) {
         this.value = value;
     }

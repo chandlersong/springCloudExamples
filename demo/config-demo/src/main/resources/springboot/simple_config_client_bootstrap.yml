@@ -9,10 +9,9 @@ spring:
   jmx:
     default-domain: simple_config_client1
   profiles:
-    active: development
+    active: development  # one way to define profile
   cloud:
     config:
       enabled: true
       uri: http://localhost:8080
-      profile: development
-      label: master
+      profile: development # one way to define profile
