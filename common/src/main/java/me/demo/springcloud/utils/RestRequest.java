@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2018
+ * @Author:chandler song, email:chandler605@outlook.com
+ * @LastModified:2018-10-11T07:16:56.909+08:00
+ * LGPL licence
+ *
+ */
+
 package me.demo.springcloud.utils;
 
 public class RestRequest {
@@ -8,6 +16,10 @@ public class RestRequest {
 
     public static String get(String host, int port, String url) {
         return (new RestTemplateWrapper(host, port)).doGet(url);
+    }
+
+    public static String get(int port, String url) {
+        return (new RestTemplateWrapper(DEFAULT_HOST, port)).doGet(url);
     }
 
     public static String get(String url) {

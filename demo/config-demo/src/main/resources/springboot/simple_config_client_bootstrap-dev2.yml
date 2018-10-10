@@ -1,0 +1,15 @@
+server:
+  port: 8083
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: simple_config_client
+  jmx:
+    default-domain: simple_config_client_dev2
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8080
+      profile: dev # one way to define profile
