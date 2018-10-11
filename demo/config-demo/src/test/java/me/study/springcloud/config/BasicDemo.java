@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-11T22:54:54.759+08:00
+ * @LastModified:2018-10-11T23:43:26.879+08:00
  * LGPL licence
  *
  */
@@ -50,6 +50,16 @@ public class BasicDemo {
         Assert.assertEquals("default", RestRequest.get(8081, ""));
         Assert.assertEquals("dev", RestRequest.get(8082, ""));
         Assert.assertEquals("dev", RestRequest.get(8083, ""));
+        logger.info("stop");
+    }
+
+
+    @Test
+    public void testPlainText() {
+
+        ServerRunner.createAndRunServer(SimpleConfigServer.class, "local_config_server_without_eureka.yml");
+        logger.info("{}", RestRequest.get("aa/development/master/test.json"));
+        logger.info("{}", RestRequest.get("aa/dev/master/test.json"));
         logger.info("stop");
     }
 }
