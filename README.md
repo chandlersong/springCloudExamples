@@ -15,6 +15,7 @@ when you build the project, please use **mvn install -DskipTests**
 - [Ribbon examples](demo/ribbon-demo/README.md)
 - [Zuul examples](demo/zuul-demo/README.md)
 - [Feign examples](demo/feign-demo/README.md)
+- [config examples](demo/config-demo/README.md)
 
 
 
