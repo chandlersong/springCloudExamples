@@ -1,12 +1,14 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-11T07:16:56.909+08:00
+ * @LastModified:2018-10-22T22:56:07.064+08:00
  * LGPL licence
  *
  */
 
 package me.demo.springcloud.utils;
+
+import org.springframework.http.ResponseEntity;
 
 public class RestRequest {
 
@@ -24,5 +26,18 @@ public class RestRequest {
 
     public static String get(String url) {
         return get(DEFAULT_HOST, DEFAULT_PORT, url);
+    }
+
+
+    public static ResponseEntity<String> getResponse(String url) {
+        return getResponse(DEFAULT_HOST, DEFAULT_PORT, url);
+    }
+
+    public static ResponseEntity<String> getResponse(int port, String url) {
+        return getResponse(DEFAULT_HOST, port, url);
+    }
+
+    public static ResponseEntity<String> getResponse(String host, int port, String url) {
+        return (new RestTemplateWrapper(host, port)).doGetResponse(url);
     }
 }

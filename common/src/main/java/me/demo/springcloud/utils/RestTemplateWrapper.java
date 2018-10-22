@@ -1,6 +1,15 @@
+/*
+ * Copyright (c) 2018
+ * @Author:chandler song, email:chandler605@outlook.com
+ * @LastModified:2018-10-22T22:56:07.068+08:00
+ * LGPL licence
+ *
+ */
+
 package me.demo.springcloud.utils;
 
 import org.slf4j.Logger;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -25,12 +34,13 @@ public class RestTemplateWrapper {
     }
 
     public String doGet(String path) {
-        String callPath = String.format(pathFormat, path);
-        logger.trace("path {}", callPath);
-        return restTemplate.getForEntity(callPath, String.class).getBody();
+        return doGetResponse(path).getBody();
     }
 
-    public String doGet(String format, Object... args) {
-        return doGet(String.format(format, args));
+    public ResponseEntity<String> doGetResponse(String path) {
+        String callPath = String.format(pathFormat, path);
+        logger.trace("path {}", callPath);
+        return restTemplate.getForEntity(callPath, String.class);
     }
+
 }
