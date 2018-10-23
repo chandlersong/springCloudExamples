@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2018
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-10-22T22:56:07.071+08:00
+  ~ @LastModified:2018-10-23T23:56:18.424+08:00
   ~ LGPL licence
   ~
   -->
@@ -63,6 +63,11 @@
             <dependency>
                 <groupId>me.study.springcloud</groupId>
                 <artifactId>oauth2-server</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>oauth2-resource-server</artifactId>
                 <version>${me.study.springcloud}</version>
             </dependency>
             <dependency>

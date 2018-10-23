@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-22T22:56:07.080+08:00
+ * @LastModified:2018-10-23T23:56:18.440+08:00
  * LGPL licence
  *
  */
@@ -21,7 +21,10 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,4 +53,15 @@ public class OAuth2ApplicationServer {
         manager.createUser(User.withUsername("user").password("{bcrypt}$2a$10$cNf9lwLAWFI.K0g3YbESzuOZ8GqABia39qJbMVo468OmR.JmtohzS").roles("USER").build());
         return manager;
     }
+
+    @RestController
+    class UserController {
+
+        @GetMapping({"/user", "/me"})
+        public Principal user(Principal user) {
+            return user;
+        }
+
+    }
+
 }
