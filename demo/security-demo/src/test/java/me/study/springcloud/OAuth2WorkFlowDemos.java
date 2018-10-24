@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-24T22:50:00.422+08:00
+ * @LastModified:2018-10-24T22:54:53.763+08:00
  * LGPL licence
  *
  */
@@ -42,9 +42,9 @@ import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class OAuth2Demos {
+public class OAuth2WorkFlowDemos {
 
-    private static final Logger logger = getLogger(OAuth2Demos.class);
+    private static final Logger logger = getLogger(OAuth2WorkFlowDemos.class);
 
     @Test
     public void OAuth2Examples() throws IOException, JSONException {
