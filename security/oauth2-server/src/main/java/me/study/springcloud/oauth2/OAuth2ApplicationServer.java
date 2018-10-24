@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-23T23:56:18.440+08:00
+ * @LastModified:2018-10-24T22:50:00.412+08:00
  * LGPL licence
  *
  */
@@ -50,7 +50,7 @@ public class OAuth2ApplicationServer {
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user").password("{bcrypt}$2a$10$cNf9lwLAWFI.K0g3YbESzuOZ8GqABia39qJbMVo468OmR.JmtohzS").roles("USER").build());
+        manager.createUser(User.withUsername("user").password("{bcrypt}$2a$10$ETDrFt.TcsQ5AY.59kb8/OUxqBatlkNZd1XuJRwYh7Toz8fAcvHzW").roles("USER").build());
         return manager;
     }
 
