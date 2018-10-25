@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-24T22:54:53.763+08:00
+ * @LastModified:2018-10-25T22:01:57.140+08:00
  * LGPL licence
  *
  */
@@ -9,6 +9,7 @@
 package me.study.springcloud;
 
 import com.google.common.base.Charsets;
+import me.demo.springcloud.utils.OAuth2TemplateFactory;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.oauth2.OAuth2ApplicationServer;
 import me.study.springcloud.oauth2.resource.ResourceApplicationServer;
@@ -29,16 +30,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.client.token.AccessTokenRequest;
-import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
-import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -46,6 +40,7 @@ public class OAuth2WorkFlowDemos {
 
     private static final Logger logger = getLogger(OAuth2WorkFlowDemos.class);
 
+    private OAuth2TemplateFactory templateFactory = new OAuth2TemplateFactory();
     @Test
     public void OAuth2Examples() throws IOException, JSONException {
         ServerRunner.createAndRunServer(OAuth2ApplicationServer.class, "oauth2_simple_sever.yml");
@@ -96,35 +91,15 @@ public class OAuth2WorkFlowDemos {
         ServerRunner.createAndRunServer(ResourceApplicationServer.class, "oauth2_resource_sever.yml");
 
 
-        OAuth2RestTemplate template = restTemplate();
-        ResponseEntity<String> get = template.getForEntity("http://localhost:9081/resource", String.class);
+        OAuth2RestTemplate template = templateFactory.createRestTemplate();
+        ResponseEntity<String> get = template.getForEntity("http://localhost:8081/resource", String.class);
         Assert.assertEquals("ok", get.getBody());
         logger.info("stop");
     }
 
 
-    private OAuth2ProtectedResourceDetails resource() {
 
-        ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 
-        List<String> scopes = new ArrayList<>(2);
-        scopes.add("all");
-        resource.setAccessTokenUri("http://localhost:9080/oauth/token");
-        resource.setClientId("client");
-        resource.setClientSecret("secret");
-        resource.setGrantType("password");
-        resource.setScope(scopes);
 
-        resource.setUsername("user");
-        resource.setPassword("password");
-
-        return resource;
-    }
-
-    private OAuth2RestTemplate restTemplate() {
-        AccessTokenRequest atr = new DefaultAccessTokenRequest();
-
-        return new OAuth2RestTemplate(resource(), new DefaultOAuth2ClientContext(atr));
-    }
 
 }
