@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-25T22:01:57.140+08:00
+ * @LastModified:2018-11-12T23:14:26.356+08:00
  * LGPL licence
  *
  */
@@ -56,7 +56,7 @@ public class OAuth2WorkFlowDemos {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodePassword = encoder.encode("password");
         logger.info("password is {}", encodePassword);
-        HttpPost post = new HttpPost("http://localhost:9080/oauth/token");
+        HttpPost post = new HttpPost("http://localhost:8080/oauth/token");
         post.setHeader("authorization", String.format("Basic %1s", new String(Base64.encodeBase64("client:secret".getBytes()))));
         post.setHeader("content-type", "application/x-www-form-urlencoded");
         post.setEntity(new StringEntity(String.format("username=user&password=%1$s&grant_type=password&&scope=all", "password")));

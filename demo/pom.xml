@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2018
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-10-23T23:56:18.424+08:00
+  ~ @LastModified:2018-11-12T23:14:26.325+08:00
   ~ LGPL licence
   ~
   -->
@@ -68,6 +68,16 @@
             <dependency>
                 <groupId>me.study.springcloud</groupId>
                 <artifactId>oauth2-resource-server</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>jwt-server</artifactId>
+                <version>${me.study.springcloud}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.study.springcloud</groupId>
+                <artifactId>jwt-resource-server</artifactId>
                 <version>${me.study.springcloud}</version>
             </dependency>
             <dependency>
