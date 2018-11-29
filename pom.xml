@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2018
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-10-22T22:56:07.095+08:00
+  ~ @LastModified:2018-11-29T21:18:59.793+08:00
   ~ LGPL licence
   ~
   -->
@@ -14,7 +14,7 @@
 
     <groupId>me.study.springcloud</groupId>
     <artifactId>springcloud</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.5.0--SNAPSHOT</version>
     <modules>
         <module>common</module>
         <module>eureka</module>
@@ -40,7 +40,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <me.study.springcloud>1.0-SNAPSHOT</me.study.springcloud>
+        <me.study.springcloud>0.5.0--SNAPSHOT</me.study.springcloud>
     </properties>
 
 
