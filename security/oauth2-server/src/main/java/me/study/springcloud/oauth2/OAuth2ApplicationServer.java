@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-24T22:50:00.412+08:00
+ * @LastModified:2018-11-29T22:24:28.913+08:00
  * LGPL licence
  *
  */
@@ -56,7 +56,6 @@ public class OAuth2ApplicationServer {
 
     @RestController
     class UserController {
-
         @GetMapping({"/user", "/me"})
         public Principal user(Principal user) {
             return user;
