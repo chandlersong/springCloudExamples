@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-11-18T21:04:13.391+08:00
+ * @LastModified:2018-12-02T22:39:52.041+08:00
  * LGPL licence
  *
  */
@@ -9,6 +9,7 @@
 package me.study.springcloud;
 
 import com.google.common.base.Charsets;
+import me.demo.springcloud.utils.OAuth2TemplateFactory;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.jwt.JwtApplicationServer;
 import me.study.springcloud.jwt.resource.JwtResourceApplicationServer;
@@ -27,7 +28,9 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import java.io.IOException;
 
@@ -36,6 +39,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class JWTDemos {
 
     private static final Logger logger = getLogger(JWTDemos.class);
+
+    private OAuth2TemplateFactory templateFactory = new OAuth2TemplateFactory();
 
     @Test
     public void testSimpleDemo() throws IOException, JSONException {
@@ -82,5 +87,17 @@ public class JWTDemos {
         HttpResponse withAuth = client.execute(authResource);
         logger.info("response code:{}", withAuth.getStatusLine().getStatusCode());
         logger.info("response body:{}", IOUtils.toString(withAuth.getEntity().getContent(), Charsets.UTF_8));
+    }
+
+    @Test
+    public void JwtTemplate() {
+        ServerRunner.createAndRunServer(JwtApplicationServer.class, "jwt_simple_sever.yml");
+        ServerRunner.createAndRunServer(JwtResourceApplicationServer.class, "jwt_resource_sever.yml");
+
+
+        OAuth2RestTemplate template = templateFactory.createRestTemplate();
+        ResponseEntity<String> get = template.getForEntity("http://localhost:8081/resource", String.class);
+        Assert.assertEquals("ok", get.getBody());
+        logger.info("stop");
     }
 }
