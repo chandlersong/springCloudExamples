@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-11-12T23:14:26.333+08:00
+ * @LastModified:2018-12-04T23:17:19.766+08:00
  * LGPL licence
  *
  */
@@ -11,6 +11,7 @@ package me.study.springcloud.jwt.resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
@@ -44,5 +45,13 @@ public class JwtResourceServerConfig extends ResourceServerConfigurerAdapter {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
         return defaultTokenServices;
+    }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/health").permitAll()
+                .antMatchers("/info").permitAll()
+                .antMatchers("/**").access("#oauth2.hasScope('all')");
     }
 }
