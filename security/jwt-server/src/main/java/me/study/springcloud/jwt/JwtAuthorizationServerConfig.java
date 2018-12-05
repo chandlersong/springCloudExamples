@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-11-12T23:14:26.344+08:00
+ * @LastModified:2018-12-05T21:09:21.388+08:00
  * LGPL licence
  *
  */
@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
@@ -47,11 +48,18 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
+        InMemoryClientDetailsServiceBuilder memoryBuilder = clients.inMemory();
+        memoryBuilder
                 .withClient("client")
                 .authorizedGrantTypes("password")
                 .secret("{noop}secret")
                 .scopes("all");
+
+        memoryBuilder
+                .withClient("client2")
+                .authorizedGrantTypes("password")
+                .secret("{noop}abc")
+                .scopes("read");
     }
 
     @Bean

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-02T22:39:52.041+08:00
+ * @LastModified:2018-12-05T21:13:52.425+08:00
  * LGPL licence
  *
  */
@@ -33,6 +33,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -94,10 +95,23 @@ public class JWTDemos {
         ServerRunner.createAndRunServer(JwtApplicationServer.class, "jwt_simple_sever.yml");
         ServerRunner.createAndRunServer(JwtResourceApplicationServer.class, "jwt_resource_sever.yml");
 
-
-        OAuth2RestTemplate template = templateFactory.createRestTemplate();
-        ResponseEntity<String> get = template.getForEntity("http://localhost:8081/resource", String.class);
+        ResponseEntity<String> get;
+        OAuth2RestTemplate client1 = templateFactory.createRestTemplate();
+        get = client1.getForEntity("http://localhost:8081/resource", String.class);
         Assert.assertEquals("ok", get.getBody());
         logger.info("stop");
+
+        templateFactory.setClientId("client2");
+        templateFactory.setSecret("abc");
+        templateFactory.setScopes(Collections.singletonList("read"));
+        OAuth2RestTemplate client2 = templateFactory.createRestTemplate();
+
+
+        try {
+            client2.getForEntity("http://localhost:8081/resource", String.class);
+        } catch (Exception e) {
+            // the error code is 403
+            logger.error("scope not correct:", e);
+        }
     }
 }
