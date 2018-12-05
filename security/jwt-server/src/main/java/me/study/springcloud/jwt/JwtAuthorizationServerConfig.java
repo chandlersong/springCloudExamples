@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-05T21:09:21.388+08:00
+ * @LastModified:2018-12-05T23:11:37.499+08:00
  * LGPL licence
  *
  */
@@ -41,8 +41,14 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(
                 Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(endpoints.getTokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
+        tokenServices.setTokenEnhancer(tokenEnhancerChain);
+        tokenServices.setAccessTokenValiditySeconds(5);
         endpoints.tokenStore(tokenStore())
-                .accessTokenConverter(accessTokenConverter())
+                .tokenServices(tokenServices)
                 .authenticationManager(authenticationManager);
     }
 
@@ -51,7 +57,7 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
         InMemoryClientDetailsServiceBuilder memoryBuilder = clients.inMemory();
         memoryBuilder
                 .withClient("client")
-                .authorizedGrantTypes("password")
+                .authorizedGrantTypes("password", "refresh_token")
                 .secret("{noop}secret")
                 .scopes("all");
 

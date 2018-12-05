@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-05T21:13:52.425+08:00
+ * @LastModified:2018-12-05T23:11:37.504+08:00
  * LGPL licence
  *
  */
@@ -82,7 +82,6 @@ public class JWTDemos {
         logger.info("user info:{}", new String(Base64.decodeBase64(token.split("\\.")[1])));
         logger.info("taller:{}", new String(Base64.decodeBase64(token.split("\\.")[2])));
 
-        JSONObject json = new JSONObject(responseContext);
         HttpGet authResource = new HttpGet("http://localhost:8081/resource");
         authResource.setHeader("Authorization", String.format("Bearer %1s", token));
         HttpResponse withAuth = client.execute(authResource);
@@ -113,5 +112,102 @@ public class JWTDemos {
             // the error code is 403
             logger.error("scope not correct:", e);
         }
+    }
+
+    @Test
+    public void printToken() throws Exception {
+        ServerRunner.createAndRunServer(JwtApplicationServer.class, "jwt_simple_sever.yml");
+        ServerRunner.createAndRunServer(JwtResourceApplicationServer.class, "jwt_resource_sever.yml");
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpGet resource = new HttpGet("http://localhost:8081/resource");
+        HttpResponse resourceResource = client.execute(resource);
+
+        Assert.assertEquals(401, resourceResource.getStatusLine().getStatusCode());
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodePassword = encoder.encode("password");
+        logger.info("password is {}", encodePassword);
+        HttpPost post = new HttpPost("http://localhost:8080/oauth/token");
+
+        post.setHeader("authorization", String.format("Basic %1s", new String(Base64.encodeBase64("client:secret".getBytes()))));
+        post.setHeader("content-type", "application/x-www-form-urlencoded");
+        post.setEntity(new StringEntity(String.format("username=user&password=%1$s&grant_type=password&&scope=all", "password")));
+        HttpResponse response = client.execute(post);
+
+
+        HeaderIterator headerIterator = response.headerIterator();
+
+        while (headerIterator.hasNext()) {
+            Header header = headerIterator.nextHeader();
+
+            logger.info("header key is {},header value is{}", header.getName(), header.getValue());
+        }
+        String responseContext = IOUtils.toString(response.getEntity().getContent(), Charsets.UTF_8);
+        logger.info("response context {}", responseContext);
+
+        JSONObject auth = new JSONObject(responseContext);
+        String token = auth.get("access_token").toString();
+        logger.info("key:{}", token);
+        logger.info("header :{}", new String(Base64.decodeBase64(token.split("\\.")[0])));
+        logger.info("user info:{}", new String(Base64.decodeBase64(token.split("\\.")[1])));
+        logger.info("taller:{}", new String(Base64.decodeBase64(token.split("\\.")[2])));
+
+
+    }
+
+
+    @Test
+    public void refreshToken() throws Exception {
+        ServerRunner.createAndRunServer(JwtApplicationServer.class, "jwt_simple_sever.yml");
+        ServerRunner.createAndRunServer(JwtResourceApplicationServer.class, "jwt_resource_sever.yml");
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpGet resource = new HttpGet("http://localhost:8081/resource");
+        HttpResponse resourceResource = client.execute(resource);
+
+        Assert.assertEquals(401, resourceResource.getStatusLine().getStatusCode());
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodePassword = encoder.encode("password");
+        logger.info("password is {}", encodePassword);
+        HttpPost post = new HttpPost("http://localhost:8080/oauth/token");
+
+        post.setHeader("authorization", String.format("Basic %1s", new String(Base64.encodeBase64("client:secret".getBytes()))));
+        post.setHeader("content-type", "application/x-www-form-urlencoded");
+        post.setEntity(new StringEntity(String.format("username=user&password=%1$s&grant_type=password&&scope=all", "password")));
+        HttpResponse response = client.execute(post);
+        String responseContext = IOUtils.toString(response.getEntity().getContent(), Charsets.UTF_8);
+        logger.info("response context {}", responseContext);
+
+        JSONObject auth = new JSONObject(responseContext);
+        String token = auth.get("access_token").toString();
+        String refreshToken = auth.get("refresh_token").toString();
+
+        HttpGet authResource = new HttpGet("http://localhost:8081/resource");
+        authResource.setHeader("Authorization", String.format("Bearer %1s", token));
+        HttpResponse withAuth = client.execute(authResource);
+        logger.info("response code:{}", withAuth.getStatusLine().getStatusCode());
+        logger.info("response body:{}", IOUtils.toString(withAuth.getEntity().getContent(), Charsets.UTF_8));
+
+
+        Thread.sleep(10 * 1000);
+        authResource = new HttpGet("http://localhost:8081/resource");
+        authResource.setHeader("Authorization", String.format("Bearer %1s", token));
+        HttpResponse second = client.execute(authResource);
+        logger.info("second response code:{}", second.getStatusLine().getStatusCode());
+        logger.info("second response body:{}", IOUtils.toString(second.getEntity().getContent(), Charsets.UTF_8));
+
+
+        HttpPost refreshPost = new HttpPost("http://localhost:8080/oauth/token");
+
+        refreshPost.setHeader("authorization", String.format("Basic %1s", new String(Base64.encodeBase64("client:secret".getBytes()))));
+        refreshPost.setHeader("content-type", "application/x-www-form-urlencoded");
+        refreshPost.setEntity(new StringEntity(String.format("grant_type=refresh_token&refresh_token=%1s", refreshToken)));
+        HttpResponse refreshResponse = client.execute(refreshPost);
+
+        logger.info("refresh response code:{}", refreshResponse.getStatusLine().getStatusCode());
+        logger.info("refresh response body:{}", IOUtils.toString(refreshResponse.getEntity().getContent(), Charsets.UTF_8));
+
     }
 }
