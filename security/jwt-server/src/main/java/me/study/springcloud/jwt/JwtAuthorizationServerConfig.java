@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-06T22:48:04.148+08:00
+ * @LastModified:2018-12-06T23:36:13.886+08:00
  * LGPL licence
  *
  */
@@ -76,9 +76,9 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("123");
         KeyStoreKeyFactory keyStoreKeyFactory =
                 new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
         return converter;
     }
 

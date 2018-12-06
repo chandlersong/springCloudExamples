@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2018
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-12-06T22:48:04.153+08:00
+  ~ @LastModified:2018-12-06T23:36:13.890+08:00
   ~ LGPL licence
   ~
   -->
@@ -40,7 +40,6 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
         </dependency>
     </dependencies>
 </project>

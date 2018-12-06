@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2018
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-11-29T21:18:59.793+08:00
+  ~ @LastModified:2018-12-06T23:36:13.895+08:00
   ~ LGPL licence
   ~
   -->
@@ -82,6 +82,11 @@
                 <groupId>me.study.springcloud</groupId>
                 <artifactId>common</artifactId>
                 <version>${me.study.springcloud}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.6</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
