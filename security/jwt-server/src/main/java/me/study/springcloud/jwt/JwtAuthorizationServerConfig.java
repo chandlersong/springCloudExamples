@@ -1,16 +1,18 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-05T23:11:37.499+08:00
+ * @LastModified:2018-12-06T22:48:04.148+08:00
  * LGPL licence
  *
  */
 
 package me.study.springcloud.jwt;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
@@ -23,6 +25,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import java.util.Arrays;
 
@@ -38,17 +41,9 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
 
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(
-                Arrays.asList(tokenEnhancer(), accessTokenConverter()));
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setTokenStore(endpoints.getTokenStore());
-        tokenServices.setSupportRefreshToken(true);
-        tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
-        tokenServices.setTokenEnhancer(tokenEnhancerChain);
-        tokenServices.setAccessTokenValiditySeconds(5);
+
         endpoints.tokenStore(tokenStore())
-                .tokenServices(tokenServices)
+                .tokenServices(tokenServices())
                 .authenticationManager(authenticationManager);
     }
 
@@ -82,15 +77,23 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey("123");
+        KeyStoreKeyFactory keyStoreKeyFactory =
+                new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
         return converter;
     }
 
     @Bean
     @Primary
     public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        return defaultTokenServices;
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(
+                Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(tokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setTokenEnhancer(tokenEnhancerChain);
+        tokenServices.setAccessTokenValiditySeconds(5);
+
+        return tokenServices;
     }
 }

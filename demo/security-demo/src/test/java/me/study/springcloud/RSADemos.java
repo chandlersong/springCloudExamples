@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-25T23:11:46.157+08:00
+ * @LastModified:2018-12-06T22:48:04.161+08:00
  * LGPL licence
  *
  */
@@ -11,26 +11,29 @@ package me.study.springcloud;
 import com.google.common.base.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.Base64Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 
 public class RSADemos {
 
     @Test
-    public void generateKeys() throws NoSuchAlgorithmException, IOException {
-        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-        keyGen.initialize(1024);
-        KeyPair kp = keyGen.generateKeyPair();
-        Key pub = kp.getPublic();
-        Key pvt = kp.getPrivate();
+    public void generateKeys() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
+        final KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
 
-        FileUtils.writeStringToFile(new File("src/main/key/rsa.pub"), Base64Utils.encodeToString(pub.getEncoded()), Charsets.UTF_8);
-        FileUtils.writeStringToFile(new File("src/main/key/rsa.key"), Base64Utils.encodeToString(pvt.getEncoded()), Charsets.UTF_8);
+        keystore.load(new ClassPathResource("mytest.jks").getInputStream(), "mypass".toCharArray());
+
+
+        final Certificate cert = keystore.getCertificate("mytest");
+        final PublicKey publicKey = cert.getPublicKey();
+        FileUtils.writeStringToFile(new File("src/test/resources/rsa.pub"), Base64Utils.encodeToString(publicKey.getEncoded()), Charsets.UTF_8);
     }
 }

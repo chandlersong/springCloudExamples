@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-05T23:11:37.504+08:00
+ * @LastModified:2018-12-06T22:48:04.157+08:00
  * LGPL licence
  *
  */
@@ -12,7 +12,7 @@ import com.google.common.base.Charsets;
 import me.demo.springcloud.utils.OAuth2TemplateFactory;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.jwt.JwtApplicationServer;
-import me.study.springcloud.jwt.resource.JwtResourceApplicationServer;
+import me.study.springcloud.jwtresource.JwtResourceApplicationServer;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
@@ -34,6 +34,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -74,12 +75,14 @@ public class JWTDemos {
         }
         String responseContext = IOUtils.toString(response.getEntity().getContent(), Charsets.UTF_8);
         logger.info("response context {}", responseContext);
-
         JSONObject auth = new JSONObject(responseContext);
         String token = auth.get("access_token").toString();
         logger.info("key:{}", token);
         logger.info("header :{}", new String(Base64.decodeBase64(token.split("\\.")[0])));
-        logger.info("user info:{}", new String(Base64.decodeBase64(token.split("\\.")[1])));
+        JSONObject payload = new JSONObject(new String(Base64.decodeBase64(token.split("\\.")[1])));
+        logger.info("user info:{}", payload.toString());
+        logger.info("expire date:{}", new Date(payload.getLong("exp") * 1000));
+
         logger.info("taller:{}", new String(Base64.decodeBase64(token.split("\\.")[2])));
 
         HttpGet authResource = new HttpGet("http://localhost:8081/resource");
