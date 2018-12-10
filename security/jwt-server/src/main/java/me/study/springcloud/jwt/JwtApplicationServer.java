@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-11-12T23:14:26.341+08:00
+ * @LastModified:2018-12-10T23:37:47.791+08:00
  * LGPL licence
  *
  */
@@ -11,15 +11,15 @@ package me.study.springcloud.jwt;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
+import java.security.KeyPair;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,15 +40,10 @@ public class JwtApplicationServer {
         return new DelegatingPasswordEncoder("bcrypt", encoders);
     }
 
-    /**
-     * it's seems AuthenticationManager need the user DetailsSevers
-     *
-     * @return UserDetailsService
-     */
     @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user").password("{bcrypt}$2a$10$ETDrFt.TcsQ5AY.59kb8/OUxqBatlkNZd1XuJRwYh7Toz8fAcvHzW").roles("USER").build());
-        return manager;
+    public KeyPair generateKeyPair() {
+        KeyStoreKeyFactory keyStoreKeyFactory =
+                new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
+        return keyStoreKeyFactory.getKeyPair("mytest");
     }
 }

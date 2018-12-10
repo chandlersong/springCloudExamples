@@ -1,11 +1,6 @@
 server:
   port: 8081
 
-security:
-  oauth2:
-    resource:
-      userInfoUri: http://localhost:8080/me
-
 eureka:
   client:
     enabled: false
@@ -17,3 +12,8 @@ logging:
 spring:
   jmx:
     default-domain: oauth2_simple_resource_server
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/.well-known/jwks.json

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-06T22:48:04.157+08:00
+ * @LastModified:2018-12-10T23:37:47.803+08:00
  * LGPL licence
  *
  */
@@ -43,6 +43,7 @@ public class JWTDemos {
     private static final Logger logger = getLogger(JWTDemos.class);
 
     private OAuth2TemplateFactory templateFactory = new OAuth2TemplateFactory();
+
 
     @Test
     public void testSimpleDemo() throws IOException, JSONException {
