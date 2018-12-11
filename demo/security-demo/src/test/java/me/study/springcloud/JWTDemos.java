@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-10T23:37:47.803+08:00
+ * @LastModified:2018-12-11T21:43:15.934+08:00
  * LGPL licence
  *
  */
@@ -102,6 +102,10 @@ public class JWTDemos {
         OAuth2RestTemplate client1 = templateFactory.createRestTemplate();
         get = client1.getForEntity("http://localhost:8081/resource", String.class);
         Assert.assertEquals("ok", get.getBody());
+
+        get = client1.getForEntity("http://localhost:8081/user", String.class);
+
+        Assert.assertEquals("user", get.getBody());
         logger.info("stop");
 
         templateFactory.setClientId("client2");

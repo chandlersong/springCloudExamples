@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-25T22:01:57.131+08:00
+ * @LastModified:2018-12-11T21:43:15.924+08:00
  * LGPL licence
  *
  */
@@ -14,9 +14,12 @@ import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResour
 import org.springframework.security.oauth2.client.token.AccessTokenRequest;
 import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class OAuth2TemplateFactory {
 
@@ -58,7 +61,7 @@ public class OAuth2TemplateFactory {
 
     public OAuth2RestTemplate createRestTemplate() {
         AccessTokenRequest atr = new DefaultAccessTokenRequest();
-        return new OAuth2RestTemplate(resource(), new DefaultOAuth2ClientContext(atr));
+        return new OAuth2RestTemplate(resource(), new MyContext(atr));
     }
 
     public String getTokenPath() {
@@ -116,4 +119,28 @@ public class OAuth2TemplateFactory {
     public void setScopes(List<String> scopes) {
         this.scopes = scopes;
     }
+
+    private class MyContext extends DefaultOAuth2ClientContext {
+
+        MyContext(AccessTokenRequest atr) {
+            super(atr);
+        }
+
+
+        @Override
+        public void setAccessToken(OAuth2AccessToken accessToken) {
+
+            if (Objects.nonNull(accessToken) &&
+                    OAuth2AccessToken.BEARER_TYPE.toLowerCase().equals(accessToken.getTokenType()) &&
+                    accessToken instanceof DefaultOAuth2AccessToken) {
+                DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;
+                token.setTokenType(OAuth2AccessToken.BEARER_TYPE);
+                super.setAccessToken(token);
+            }
+            super.setAccessToken(accessToken);
+        }
+    }
 }
+
+
+
