@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-11T21:43:15.934+08:00
+ * @LastModified:2018-12-13T20:59:18.213+08:00
  * LGPL licence
  *
  */
@@ -33,6 +33,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import java.io.IOException;
+import java.time.Clock;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
 
@@ -184,13 +186,18 @@ public class JWTDemos {
         post.setHeader("authorization", String.format("Basic %1s", new String(Base64.encodeBase64("client:secret".getBytes()))));
         post.setHeader("content-type", "application/x-www-form-urlencoded");
         post.setEntity(new StringEntity(String.format("username=user&password=%1$s&grant_type=password&&scope=all", "password")));
+
+        logger.info("now instant before first post:{},instant", Instant.now(Clock.systemDefaultZone()));
         HttpResponse response = client.execute(post);
+        logger.info("now instant after first post:{},instant", Instant.now(Clock.systemDefaultZone()));
         String responseContext = IOUtils.toString(response.getEntity().getContent(), Charsets.UTF_8);
         logger.info("response context {}", responseContext);
 
         JSONObject auth = new JSONObject(responseContext);
         String token = auth.get("access_token").toString();
         String refreshToken = auth.get("refresh_token").toString();
+        JSONObject payload = new JSONObject(new String(Base64.decodeBase64(token.split("\\.")[1])));
+
 
         HttpGet authResource = new HttpGet("http://localhost:8081/resource");
         authResource.setHeader("Authorization", String.format("Bearer %1s", token));
@@ -200,10 +207,15 @@ public class JWTDemos {
 
 
         Thread.sleep(10 * 1000);
+        logger.info("expire date:{},now is {}", new Date(payload.getLong("exp") * 1000), new Date());
+        logger.info("expire instant:{}", Instant.ofEpochSecond(payload.getLong("exp")));
+        logger.info("now instant:{},instant", Instant.now(Clock.systemUTC()));
+
         authResource = new HttpGet("http://localhost:8081/resource");
         authResource.setHeader("Authorization", String.format("Bearer %1s", token));
         HttpResponse second = client.execute(authResource);
         logger.info("second response code:{}", second.getStatusLine().getStatusCode());
+        Assert.assertEquals(401, second.getStatusLine().getStatusCode());
         logger.info("second response body:{}", IOUtils.toString(second.getEntity().getContent(), Charsets.UTF_8));
 
 
