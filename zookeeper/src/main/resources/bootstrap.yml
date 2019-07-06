@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: zkDemo
+  cloud:
+    zookeeper:
+      connect-string: cloudTest:21811
+      discovery:
+        enabled: true
+        register: true
+
