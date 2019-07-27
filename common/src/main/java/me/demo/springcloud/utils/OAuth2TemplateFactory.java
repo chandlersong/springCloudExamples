@@ -1,12 +1,13 @@
 /*
- * Copyright (c) 2018
+ * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-12-11T21:43:15.924+08:00
+ * @LastModified:2019-07-27T11:26:10.656+08:00
  * LGPL licence
  *
  */
 
 package me.demo.springcloud.utils;
+
 
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -42,7 +43,7 @@ public class OAuth2TemplateFactory {
 
     private List<String> scopes = DEFAULT_SCOPES;
 
-    public OAuth2ProtectedResourceDetails resource() {
+    private OAuth2ProtectedResourceDetails resource() {
 
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 

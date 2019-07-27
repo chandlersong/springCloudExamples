@@ -1,0 +1,25 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: simple-producer
+  jmx:
+    default-domain: simple-producer
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: cloudTest:19092
+          zk-nodes: cloudTest:22182
+          auto-create-topics: true
+      bindings:
+        output:
+          destination: simpleTest
+          content-type: text/plain
+          producer:
+            partitionCount: 1
+security:
+  ignored: /**
+eureka:
+  client:
+    enabled: false

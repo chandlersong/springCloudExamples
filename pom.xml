@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-07-06T21:13:49.011+08:00
+  ~ @LastModified:2019-07-27T11:26:10.703+08:00
   ~ LGPL licence
   ~
   -->
@@ -27,6 +27,7 @@
         <module>config</module>
         <module>security</module>
         <module>zookeeper</module>
+        <module>stream</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -63,8 +64,21 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>repository.spring.milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
 
     <build>
         <pluginManagement>
@@ -92,7 +106,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.SR2</version>
+                <version>Greenwich.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
