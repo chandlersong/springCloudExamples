@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-27T11:26:10.675+08:00
+ * @LastModified:2019-07-27T16:17:40.299+08:00
  * LGPL licence
  *
  */
@@ -26,8 +26,8 @@ public class HelloWorldTests {
 
     @Test
     public void sendAndReceive() {
-        ServerRunner.createAndRunServer(KafkaStreamProducerApplication.class, "application_simple-produce.yml");
-        ServerRunner.createAndRunServer(KafkaStreamConsumerApplication.class, "application_simple-consumer.yml");
+        ServerRunner.createAndRunServer(KafkaStreamProducerApplication.class, "simple/application_simple-produce.yml");
+        ServerRunner.createAndRunServer(KafkaStreamConsumerApplication.class, "simple/application_simple-consumer.yml");
 
 
         String key = RandomStringUtils.randomAlphabetic(10);

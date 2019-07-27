@@ -18,8 +18,6 @@ spring:
           content-type: text/plain
           producer:
             partitionCount: 1
-security:
-  ignored: /**
 eureka:
   client:
     enabled: false

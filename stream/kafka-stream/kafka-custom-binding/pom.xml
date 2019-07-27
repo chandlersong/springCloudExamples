@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-07-27T16:17:40.307+08:00
+  ~ @LastModified:2019-07-27T16:17:40.293+08:00
   ~ LGPL licence
   ~
   -->
@@ -17,7 +17,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kafka-stream-simple-consumer</artifactId>
+    <artifactId>kafka-custom-binding</artifactId>
 
 
 </project>

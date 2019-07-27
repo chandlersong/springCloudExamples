@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-07-27T11:26:10.707+08:00
+  ~ @LastModified:2019-07-27T16:17:40.312+08:00
   ~ LGPL licence
   ~
   -->
@@ -23,4 +23,14 @@
         <module>kafka-stream</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka-streams</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+        </dependency>
+    </dependencies>
 </project>
