@@ -1,0 +1,36 @@
+[
+  {
+    "namespace": "me.study.springcloud",
+    "type":      "record",
+    "name":      "Address",
+    "fields":    [
+      {
+        "name": "name",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "namespace": "me.study.springcloud",
+    "type":      "record",
+    "name":      "User",
+    "fields":    [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "favorite_number",
+        "type": ["int", "null"]
+      },
+      {
+        "name": "favorite_color",
+        "type": ["string"]
+      },
+      {
+        "name": "address",
+        "type": ["Address"]
+      }
+    ]
+  }
+]

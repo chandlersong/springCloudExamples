@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-07-27T16:17:40.301+08:00
+  ~ @LastModified:2019-07-29T23:20:16.746+08:00
   ~ LGPL licence
   ~
   -->
@@ -34,6 +34,16 @@
         <dependency>
             <groupId>me.study.springcloud</groupId>
             <artifactId>kafka-custom-binding</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>kafka-producer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>kafka-consumer</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2018
+  ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-11-29T21:17:02.249+08:00
+  ~ @LastModified:2019-07-29T23:20:16.769+08:00
   ~ LGPL licence
   ~
   -->
@@ -21,6 +21,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>ok-service</module>
+        <module>protobuf-entry</module>
+        <module>avro-entry</module>
     </modules>
 
 
