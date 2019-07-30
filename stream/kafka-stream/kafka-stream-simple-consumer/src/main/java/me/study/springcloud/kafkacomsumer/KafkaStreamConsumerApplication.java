@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-27T11:26:10.685+08:00
+ * @LastModified:2019-07-31T06:21:44.347+08:00
  * LGPL licence
  *
  */
@@ -37,6 +37,10 @@ public class KafkaStreamConsumerApplication {
             log.info("Acknowledgment provided");
             acknowledgment.acknowledge();
         }
+
+        Object o = message.getHeaders().get(KafkaHeaders.OFFSET, Long.class);
+
+        log.info("offset is {}", o);
     }
 
 }
