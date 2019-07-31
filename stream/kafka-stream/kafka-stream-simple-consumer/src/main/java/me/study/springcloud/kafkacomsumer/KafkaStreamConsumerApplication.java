@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-31T06:21:44.347+08:00
+ * @LastModified:2019-07-31T22:46:48.721+08:00
  * LGPL licence
  *
  */
@@ -9,6 +9,7 @@
 package me.study.springcloud.kafkacomsumer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.Consumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -33,6 +34,8 @@ public class KafkaStreamConsumerApplication {
     public void process(Message<?> message) {
         log.info(message.getPayload().toString());
         Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
+
+
         if (acknowledgment != null) {
             log.info("Acknowledgment provided");
             acknowledgment.acknowledge();
@@ -40,6 +43,9 @@ public class KafkaStreamConsumerApplication {
 
         Object o = message.getHeaders().get(KafkaHeaders.OFFSET, Long.class);
 
+        Consumer<?, ?> consumer = message.getHeaders().get(KafkaHeaders.CONSUMER, Consumer.class);
+        assert consumer != null;
+        consumer.commitSync();
         log.info("offset is {}", o);
     }
 

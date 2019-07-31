@@ -14,7 +14,7 @@ spring:
           auto-create-topics: true
       bindings:
         output:
-          destination: simpleTest
+          destination: textPlain
           content-type: text/plain
           producer:
             partitionCount: 1

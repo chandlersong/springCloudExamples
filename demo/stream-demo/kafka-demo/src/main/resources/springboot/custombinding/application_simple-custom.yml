@@ -15,7 +15,7 @@ spring:
           min-partition-count: 1
       bindings:
         myInput:
-          destination: simpleTest
+          destination: textPlain
           group: s1
           consumer:
             autoCommitOffset: false
