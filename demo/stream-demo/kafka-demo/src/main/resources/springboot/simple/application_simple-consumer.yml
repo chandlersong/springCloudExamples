@@ -11,10 +11,9 @@ spring:
           zk-nodes: cloudTest:22182
           auto-create-topics: true
           min-partition-count: 1
-        bindings:
-          input:
-            consumer:
-              autoCommitOffset: false
+        default:
+          consumer:
+            autoCommitOffset: false
       bindings:
         input:
           destination: textPlain
