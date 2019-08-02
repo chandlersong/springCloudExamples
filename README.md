@@ -17,6 +17,7 @@ when you build the project, please use **mvn install -DskipTests**
 - [Feign examples](demo/feign-demo/README.md)
 - [Config examples](demo/config-demo/README.md)
 - [Security examples](demo/security-demo/README.md)
+- [Stream examples](demo/stream-demo/README.md)
 
 
 
