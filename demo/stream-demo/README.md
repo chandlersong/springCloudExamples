@@ -1,1 +1,1 @@
-- [Kafka Demo](kafka-demo/README.MD)  
+- [Kafka Demo](kafka-demo/README.md)  
