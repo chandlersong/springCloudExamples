@@ -1,0 +1,21 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: wordCount-producer
+  jmx:
+    default-domain: wordCount-producer
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: cloudTest:19092
+          zk-nodes: cloudTest:22182
+          auto-create-topics: true
+      bindings:
+        output:
+          destination: wordCount-producer
+          content-type: application/json
+eureka:
+  client:
+    enabled: false
