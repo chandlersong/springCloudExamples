@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-29T23:20:16.749+08:00
+ * @LastModified:2019-08-04T16:56:03.748+08:00
  * LGPL licence
  *
  */
@@ -30,7 +30,7 @@ public class KafkaController {
                           .setName(message)
                           .setFavoriteColor(RandomStringUtils.randomAlphanumeric(10))
                           .setFavoriteNumber(RandomUtils.nextInt(0, 100))
-                          .setAddressBuilder(Address.newBuilder().setName(RandomStringUtils.randomAlphanumeric(10)))
+                          .setAddress(Address.newBuilder().setName(RandomStringUtils.randomAlphanumeric(10)).build())
                           .build();
 
         service.sendMessage(result);

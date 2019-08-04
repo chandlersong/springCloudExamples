@@ -11,13 +11,16 @@ spring:
           zk-nodes: cloudTest:22182
           auto-create-topics: true
           min-partition-count: 1
-        default:
-          consumer:
+        bindings:
+          input:
             autoCommitOffset: false
       bindings:
         input:
           destination: textPlain
           group: s1
+        JSON_CONSUMER:
+          destination: jsonTopic
+          content-type: application/json
 eureka:
   client:
     enabled: false

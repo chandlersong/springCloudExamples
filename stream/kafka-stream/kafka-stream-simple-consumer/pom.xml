@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-07-27T16:17:40.307+08:00
+  ~ @LastModified:2019-08-04T16:56:03.758+08:00
   ~ LGPL licence
   ~
   -->
@@ -19,5 +19,12 @@
 
     <artifactId>kafka-stream-simple-consumer</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>avro-entry</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

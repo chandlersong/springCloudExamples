@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-31T22:46:48.721+08:00
+ * @LastModified:2019-08-04T16:56:03.755+08:00
  * LGPL licence
  *
  */
@@ -9,6 +9,9 @@
 package me.study.springcloud.kafkacomsumer;
 
 import lombok.extern.slf4j.Slf4j;
+import me.study.springcloud.entry.Company;
+import me.study.springcloud.entry.CompanyA;
+import me.study.springcloud.entry.CompanyB;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +23,7 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 
 @Slf4j
-@EnableBinding(Sink.class)
+@EnableBinding({Sink.class, JsonBinding.class})
 @SpringBootApplication
 public class KafkaStreamConsumerApplication {
 
@@ -47,6 +50,21 @@ public class KafkaStreamConsumerApplication {
         assert consumer != null;
         consumer.commitSync();
         log.info("offset is {}", o);
+    }
+
+    @StreamListener(JsonBinding.JSON_CONSUMER)
+    public void processJson(Message<Company> message) {
+        log.info("company is {}", message.getPayload());
+    }
+
+    @StreamListener(JsonBinding.JSON_CONSUMER)
+    public void processJson(CompanyA message) {
+        log.info("company A is {}", message.getName());
+    }
+
+    @StreamListener(JsonBinding.JSON_CONSUMER)
+    public void processJson(CompanyB message) {
+        log.info("company B is {}", message.getName());
     }
 
 }

@@ -16,8 +16,9 @@ spring:
         output:
           destination: textPlain
           content-type: text/plain
-          producer:
-            partitionCount: 1
+        jsonProducer:
+          destination: jsonTopic
+          content-type: application/json
 eureka:
   client:
     enabled: false

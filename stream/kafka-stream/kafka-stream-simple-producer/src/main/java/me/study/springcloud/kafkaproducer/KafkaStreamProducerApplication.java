@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-27T11:26:10.695+08:00
+ * @LastModified:2019-08-04T16:56:03.768+08:00
  * LGPL licence
  *
  */
@@ -29,6 +29,7 @@ public class KafkaStreamProducerApplication {
     @RequestMapping(value = "/send/{msg}", method = RequestMethod.GET)
     public void send(@PathVariable("msg") String msg) {
         service.sendMessage(msg);
+        service.sendMessageObj(msg);
     }
 
     @Autowired

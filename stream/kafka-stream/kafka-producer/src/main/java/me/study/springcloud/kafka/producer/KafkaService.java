@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-07-29T23:20:16.756+08:00
+ * @LastModified:2019-08-04T16:56:03.751+08:00
  * LGPL licence
  *
  */
@@ -18,10 +18,11 @@ import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableBinding(Source.class)
+@EnableBinding({Source.class})
 public class KafkaService {
 
     private Source source;
+
 
     public void sendMessage(User user) {
         try {
