@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-04T22:02:52.936+08:00
+ * @LastModified:2019-08-08T00:03:01.020+08:00
  * LGPL licence
  *
  */
@@ -14,7 +14,6 @@ import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.kafka.stream.KafkaStreamProcessorApplication;
 import me.study.springcloud.kafkacomsumer.KafkaStreamConsumerApplication;
 import me.study.springcloud.kafkaproducer.KafkaStreamProducerApplication;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,9 +34,7 @@ public class StreamDemo {
                                         "wordcount/application_simple-consumer.yml");
 
 
-        String key = RandomStringUtils.randomAlphabetic(10);
-        produceTemplate.doGet("send/" + key);
-        log.info("return value:{} ", key);
+        produceTemplate.doGet("/wordCount");
         log.info("stop");
     }
 }

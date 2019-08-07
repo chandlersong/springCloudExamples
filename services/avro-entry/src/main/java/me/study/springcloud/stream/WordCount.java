@@ -1,15 +1,18 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-04T22:02:52.933+08:00
+ * @LastModified:2019-08-08T00:03:01.014+08:00
  * LGPL licence
  *
  */
 
 package me.study.springcloud.stream;
 
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@NoArgsConstructor
 public class WordCount {
 
     private String word;
@@ -27,10 +30,6 @@ public class WordCount {
                 ", start=" + start +
                 ", end=" + end +
                 '}';
-    }
-
-    public WordCount() {
-
     }
 
     public WordCount(String word, long count, Date start, Date end) {

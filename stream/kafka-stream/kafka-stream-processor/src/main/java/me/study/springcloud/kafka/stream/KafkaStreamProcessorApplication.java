@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-04T22:02:52.947+08:00
+ * @LastModified:2019-08-08T00:03:01.026+08:00
  * LGPL licence
  *
  */
@@ -43,7 +43,7 @@ public class KafkaStreamProcessorApplication {
 
         @StreamListener(INPUT_TOPIC)
         @SendTo(OUTPUT_TOPIC)
-        public KStream<Bytes, WordCount> process(KStream<Bytes, String> input) {
+        public KStream<Bytes, WordCount> process(KStream<String, String> input) {
 
             return input
                     .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
