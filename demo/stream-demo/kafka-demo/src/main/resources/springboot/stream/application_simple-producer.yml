@@ -12,14 +12,14 @@ spring:
           brokers: cloudTest:19092
           zk-nodes: cloudTest:22182
           auto-create-topics: true
-        bindings:
-          output:
-            producer:
-              configuration:
-                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+          configuration:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
       bindings:
         output:
           destination: wordCount-producer
+          content-type: application/json
+        BRANCH_TEST:
+          destination: stream-branch
           content-type: application/json
 
 eureka:

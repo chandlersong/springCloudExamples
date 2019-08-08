@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-08T00:03:01.020+08:00
+ * @LastModified:2019-08-09T00:13:37.475+08:00
  * LGPL licence
  *
  */
@@ -35,6 +35,21 @@ public class StreamDemo {
 
 
         produceTemplate.doGet("/wordCount");
+        log.info("stop");
+    }
+
+
+    @Test
+    public void testBranch() {
+        ServerRunner.createAndRunServer(KafkaStreamProducerApplication.class,
+                                        "stream/application_simple-producer.yml");
+        ServerRunner.createAndRunServer(KafkaStreamProcessorApplication.class,
+                                        "stream/application_simple-processor.yml");
+        ServerRunner.createAndRunServer(KafkaStreamConsumerApplication.class,
+                                        "stream/application_simple-consumer.yml");
+
+
+        produceTemplate.doGet("/branch");
         log.info("stop");
     }
 }

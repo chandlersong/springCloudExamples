@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-08T00:03:01.032+08:00
+ * @LastModified:2019-08-09T00:13:37.492+08:00
  * LGPL licence
  *
  */
@@ -16,6 +16,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -28,15 +29,19 @@ public class KafkaService {
 
     private JsonBinding json;
 
-    public void sendMessage(String msg) {
+    public void sendMessage(String msg, String headerValue, MessageChannel output) {
         try {
 
-            source.output().send(MessageBuilder.withPayload(msg)
-                    .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString())
+            output.send(MessageBuilder.withPayload(msg)
+                                .setHeader(KafkaHeaders.MESSAGE_KEY, headerValue)
                     .build());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendMessageWithUUID(String s) {
+        sendMessage(s, UUID.randomUUID().toString(), source.output());
     }
 
 
