@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-09T00:13:37.487+08:00
+ * @LastModified:2019-08-09T22:14:50.200+08:00
  * LGPL licence
  *
  */
@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
 public class BranchListener {
 
     @StreamListener(ListenerBinding.BRANCH_1)
-    public void branch1(Message<?> message) {
-        log.info("message from branch1,{}", message.getPayload().toString());
+    public void branch1(Message<String> message) {
+        log.info("message from branch1,{}", message.getPayload());
         Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
         if (acknowledgment != null) {
             log.info("Acknowledgment provided");
@@ -32,8 +32,8 @@ public class BranchListener {
     }
 
     @StreamListener(ListenerBinding.BRANCH_2)
-    public void branch2(Message<?> message) {
-        log.info("message from branch2,{}", message.getPayload().toString());
+    public void branch2(Message<String> message) {
+        log.info("message from branch2,{}", message.getPayload());
         Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
         if (acknowledgment != null) {
             log.info("Acknowledgment provided");
@@ -43,8 +43,8 @@ public class BranchListener {
 
 
     @StreamListener(ListenerBinding.BRANCH_3)
-    public void branch3(Message<?> message) {
-        log.info("message from branch3,{}", message.getPayload().toString());
+    public void branch3(Message<String> message) {
+        log.info("message from branch3,{}", message.getPayload());
         Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
         if (acknowledgment != null) {
             log.info("Acknowledgment provided");

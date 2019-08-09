@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-04T16:56:03.755+08:00
+ * @LastModified:2019-08-09T22:14:50.205+08:00
  * LGPL licence
  *
  */
@@ -35,7 +35,7 @@ public class KafkaStreamConsumerApplication {
 
     @StreamListener(Sink.INPUT)
     public void process(Message<?> message) {
-        log.info(message.getPayload().toString());
+        log.info("word count hello world:{}", message.getPayload().toString());
         Acknowledgment acknowledgment = message.getHeaders().get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
 
 

@@ -27,19 +27,13 @@ spring:
           contentType: application/json
         Branch_output_1:
           destination: Branch_output_1
-          contentType: application/json
+          contentType: text/plain
         Branch_output_2:
           destination: Branch_output_2
-          contentType: application/json
+          contentType: text/plain
         Branch_output_3:
           destination: Branch_output_3
-          contentType: application/json
-        input:
-          destination: wordCount-producer
-          contentType: application/json
-        output:
-          destination: wordCount-output
-          contentType: application/json
+          contentType: text/plain
 
 eureka:
   client:

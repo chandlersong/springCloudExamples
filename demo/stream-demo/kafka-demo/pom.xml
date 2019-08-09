@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-08-04T22:02:52.940+08:00
+  ~ @LastModified:2019-08-09T22:14:50.193+08:00
   ~ LGPL licence
   ~
   -->
@@ -29,6 +29,16 @@
         <dependency>
             <groupId>me.study.springcloud</groupId>
             <artifactId>kafka-stream-simple-producer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>word-count-processor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>simple-branch-processor</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
