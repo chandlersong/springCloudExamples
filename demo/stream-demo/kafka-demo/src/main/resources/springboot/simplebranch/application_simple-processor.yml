@@ -21,6 +21,13 @@ spring:
               default:
                 key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
                 value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          bindings:
+            Branch_DEMO:
+              consumer:
+                applicationId: stream-branch
+            input:
+              consumer:
+                applicationId: wordCount
       bindings:
         Branch_DEMO:
           destination: stream-branch
@@ -34,6 +41,12 @@ spring:
         Branch_output_3:
           destination: Branch_output_3
           contentType: text/plain
+        input:
+          destination: wordCount-producer
+          contentType: application/json
+        output:
+          destination: wordCount-output
+          contentType: application/json
 
 eureka:
   client:

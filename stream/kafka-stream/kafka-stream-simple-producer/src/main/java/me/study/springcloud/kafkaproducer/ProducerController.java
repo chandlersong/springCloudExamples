@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-09T22:14:50.208+08:00
+ * @LastModified:2019-08-09T23:24:30.283+08:00
  * LGPL licence
  *
  */
@@ -34,7 +34,7 @@ public class ProducerController {
 
     public ProducerController() {
         for (int i = 0; i < 10; i++) {
-            messages.add(RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 10)));
+            messages.add(RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(3, 15)));
         }
     }
 

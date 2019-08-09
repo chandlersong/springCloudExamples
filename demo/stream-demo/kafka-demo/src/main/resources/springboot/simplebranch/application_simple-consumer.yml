@@ -23,6 +23,9 @@ spring:
         branch_demo_3:
           destination: Branch_output_3
           contentType: text/plain
+        input:
+          destination: wordCount-output
+          contentType: text/plain
 
 eureka:
   client:
