@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-04T16:56:03.745+08:00
+ * @LastModified:2019-08-19T22:22:39.527+08:00
  * LGPL licence
  *
  */
@@ -52,5 +52,10 @@ public class HelloWorldTests {
         produceTemplate.doGet("send/" + key);
         log.info("return value:{} ", key);
         log.info("stop");
+    }
+
+    @Test
+    public void testInteractiveQuery() {
+
     }
 }

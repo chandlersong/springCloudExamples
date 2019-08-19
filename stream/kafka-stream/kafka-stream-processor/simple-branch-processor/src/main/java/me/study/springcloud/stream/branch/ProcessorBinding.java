@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-09T22:14:50.216+08:00
+ * @LastModified:2019-08-19T22:22:39.550+08:00
  * LGPL licence
  *
  */
@@ -22,8 +22,13 @@ public interface ProcessorBinding {
 
     String BRANCH_OUTPUT_3 = "Branch_output_3";
 
+    String INTERACTIVE_QUERY = "INTERACTIVE_QUERY";
+
     @Input(BRANCH_INPUT)
     KStream<String, String> branchInput();
+
+    @Input(INTERACTIVE_QUERY)
+    KStream<String, String> interactiveQuery();
 
     @Output(BRANCH_OUTPUT_1)
     KStream<String, String> branchOutput1();

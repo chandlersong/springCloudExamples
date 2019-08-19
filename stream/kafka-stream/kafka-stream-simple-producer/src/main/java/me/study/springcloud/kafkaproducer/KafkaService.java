@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-09T00:13:37.492+08:00
+ * @LastModified:2019-08-19T22:22:39.535+08:00
  * LGPL licence
  *
  */
@@ -34,10 +34,14 @@ public class KafkaService {
 
             output.send(MessageBuilder.withPayload(msg)
                                 .setHeader(KafkaHeaders.MESSAGE_KEY, headerValue)
-                    .build());
+                                .build());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendMessageWithUUID(String s, MessageChannel channel) {
+        sendMessage(s, UUID.randomUUID().toString(), channel);
     }
 
     public void sendMessageWithUUID(String s) {

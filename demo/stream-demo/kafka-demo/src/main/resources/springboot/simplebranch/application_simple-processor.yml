@@ -25,12 +25,18 @@ spring:
             Branch_DEMO:
               consumer:
                 applicationId: stream-branch
+            INTERACTIVE_QUERY:
+              consumer:
+                applicationId: stream-interactive-query
             input:
               consumer:
                 applicationId: wordCount
       bindings:
         Branch_DEMO:
           destination: stream-branch
+          contentType: application/json
+        INTERACTIVE_QUERY:
+          destination: stream-interactive-query
           contentType: application/json
         Branch_output_1:
           destination: Branch_output_1

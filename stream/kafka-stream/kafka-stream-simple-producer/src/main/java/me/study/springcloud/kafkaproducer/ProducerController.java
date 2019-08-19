@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-09T23:24:30.283+08:00
+ * @LastModified:2019-08-19T22:22:39.541+08:00
  * LGPL licence
  *
  */
@@ -62,6 +62,14 @@ public class ProducerController {
             service.sendMessage(messages.get(RandomUtils.nextInt(0, messages.size())),
                                 keys.get(RandomUtils.nextInt(0, 3)),
                                 producer.branch());
+        }
+    }
+
+    @RequestMapping(value = "/InteractiveQuery", method = RequestMethod.GET)
+    public void InteractiveQuery() {
+        for (int i = 0; i < 100; i++) {
+            service.sendMessageWithUUID(messages.get(RandomUtils.nextInt(0, messages.size())),
+                                        producer.interactiveQuery());
         }
     }
 

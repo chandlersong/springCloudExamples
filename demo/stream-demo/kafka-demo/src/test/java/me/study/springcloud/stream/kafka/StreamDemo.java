@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-08-09T23:24:30.276+08:00
+ * @LastModified:2019-08-19T22:22:39.531+08:00
  * LGPL licence
  *
  */
@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class StreamDemo {
 
     private RestTemplateWrapper produceTemplate = new RestTemplateWrapper(18081);
+    private RestTemplateWrapper processTemplate = new RestTemplateWrapper(18082);
 
     @Test
     public void testWorkCount() {
@@ -51,7 +52,22 @@ public class StreamDemo {
 
 
         produceTemplate.doGet("/branch");
-        produceTemplate.doGet("/wordCount");
+        log.info("stop");
+    }
+
+
+    @Test
+    public void testInteractiveQuery() throws InterruptedException {
+        ServerRunner.createAndRunServer(KafkaStreamProducerApplication.class,
+                                        "simplebranch/application_simple-producer.yml");
+        ServerRunner.createAndRunServer(SimpleStreamBranchApplication.class,
+                                        "simplebranch/application_simple-processor.yml");
+
+
+        produceTemplate.doGet("/InteractiveQuery");
+        Thread.sleep(5 * 1000);
+        processTemplate.doGet("/InteractiveQuery");
+
         log.info("stop");
     }
 }

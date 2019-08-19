@@ -21,6 +21,9 @@ spring:
         BRANCH_TEST:
           destination: stream-branch
           content-type: application/json
+        INTERACTIVE_QUERY_TEST:
+          destination: stream-interactive-query
+          content-type: application/json
 
 eureka:
   client:
