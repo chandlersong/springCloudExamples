@@ -5,8 +5,6 @@
 Long offset = message.getHeaders().get(KafkaHeaders.Long, Long.class);
 ```
 the code is in consumer class and you can retrieve other meta information from header too. 
-
-[Customer binding Demo](src/test/java/me/study/springcloud/stream/kafka/CustomerBindingDemos.java)  
 - customer binding examples  
 the binder class:
 ```java
@@ -102,3 +100,47 @@ and there are two different meaning
 -  `spring.cloud.kafka.binder.schema.registry.url`: where the message converter to read schema. 
 
 if you want to load the schema from local, you can change the configuration in the MessageConverter.
+
+[Stream Demo](src/test/java/me/study/springcloud/stream/kafka/Stream.java)  
+
+- `testWorkCount`: like the hello word for the stream.
+- `testBranch`: how to use branch in the stream, for more details,check the class **StreamDemo**  
+use Predicate to define the key
+```java
+Predicate<String, String> output1 = (k, v) -> k.equals("1");
+Predicate<String, String> output2 = (k, v) -> k.equals("2");
+Predicate<String, String> output3 = (k, v) -> k.equals("3");
+```
+
+send the message to different topic, base on the condition above.
+```java
+input.branch(output1, output2, output3);
+```
+
+- `InteractiveQuery`: how to use interactiveQuery,check the class **StreamDemo**    
+
+save the data to locak storage, the key is *Materialized*
+```java
+.count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("interactiveQuery1")
+               .withKeySerde(Serdes.String())
+               .withValueSerde(Serdes.Long()));
+```
+
+fetch
+```java
+ReadOnlyKeyValueStore<Object, Object> store = queryService.getQueryableStore("interactiveQuery1",
+                                                                                     QueryableStoreTypes.keyValueStore());
+
+KeyValueIterator<Object, Object> all = store.all();
+Map<String, Integer> result = Maps.newHashMap();
+while (all.hasNext()) {
+    KeyValue<Object, Object> next = all.next();
+    Object key = next.key;
+    Object value = next.value;
+    //key is String, value is long
+    log.info("key is {},value is {}", key, value);
+    result.put(key.toString(), Integer.valueOf(value.toString()));
+}
+```
+
+
