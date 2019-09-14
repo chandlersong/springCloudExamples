@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ok-service
+  jmx:
+    default-domain: OKService_client1
+
+eureka:
+  client:
+    enabled: false
+
+ok-service-meta:
+  clientId: client1

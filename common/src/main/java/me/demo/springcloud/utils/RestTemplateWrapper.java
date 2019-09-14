@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2018
+ * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2018-10-22T22:56:07.068+08:00
+ * @LastModified:2019-09-14T14:20:48.745+08:00
  * LGPL licence
  *
  */
@@ -30,7 +30,7 @@ public class RestTemplateWrapper {
     }
 
     public RestTemplateWrapper(String host, int port) {
-        pathFormat = "http://" + host + ":" + String.valueOf(port) + "/%1$s";
+        pathFormat = "http://" + host + ":" + port + "/%1$s";
     }
 
     public String doGet(String path) {
@@ -42,5 +42,6 @@ public class RestTemplateWrapper {
         logger.trace("path {}", callPath);
         return restTemplate.getForEntity(callPath, String.class);
     }
+
 
 }

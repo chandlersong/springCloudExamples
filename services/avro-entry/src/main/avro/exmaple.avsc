@@ -25,11 +25,17 @@
       },
       {
         "name": "favorite_color",
-        "type": ["string"]
+        "type": [
+          "null",
+          "string"
+        ]
       },
       {
         "name": "address",
-        "type": ["Address"]
+        "type": [
+          "null",
+          "Address"
+        ]
       }
     ]
   }

@@ -1,5 +1,15 @@
+/*
+ * Copyright (c) 2019
+ * @Author:chandler song, email:chandler605@outlook.com
+ * @LastModified:2019-09-14T14:20:48.723+08:00
+ * LGPL licence
+ *
+ */
+
 package me.study.springcloud.services.ok;
 
+import me.study.springcloud.io.AvroMessageConverter;
+import org.apache.avro.specific.SpecificRecordBase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import static me.study.springcloud.io.AvroMediaType.AVRO_BINARY;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -32,5 +44,12 @@ public class OKServicesApplication implements WebMvcConfigurer {
         filter.setIncludeHeaders(false);
         filter.setAfterMessagePrefix(String.format("%1$s receive request:", clientId));
         return filter;
+    }
+
+    @Bean
+    public AvroMessageConverter<SpecificRecordBase> createAvroConverter() {
+        return new AvroMessageConverter<>(
+                true,
+                AVRO_BINARY);
     }
 }
