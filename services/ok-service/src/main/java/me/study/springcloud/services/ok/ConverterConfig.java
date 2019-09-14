@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-14T14:20:48.715+08:00
+ * @LastModified:2019-09-14T16:29:18.240+08:00
  * LGPL licence
  *
  */
@@ -16,6 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 import static me.study.springcloud.io.AvroMediaType.AVRO_BINARY;
+import static me.study.springcloud.io.AvroMediaType.AVRO_JSON;
+
 
 @Configuration
 public class ConverterConfig implements WebMvcConfigurer {
@@ -27,5 +29,8 @@ public class ConverterConfig implements WebMvcConfigurer {
         converters.add(0, new AvroMessageConverter<>(
                 true,
                 AVRO_BINARY));
+        converters.add(1, new AvroMessageConverter<>(
+                false,
+                AVRO_JSON));
     }
 }

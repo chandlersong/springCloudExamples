@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-14T14:20:48.718+08:00
+ * @LastModified:2019-09-14T16:29:18.240+08:00
  * LGPL licence
  *
  */
@@ -34,7 +34,12 @@ public class OkController {
 
 
     @PostMapping(value = "/avroBinary", consumes = AvroMediaType.AVRO_BINARY_VALUE, produces = AvroMediaType.AVRO_BINARY_VALUE)
-    public ResponseEntity<Address> avro(@RequestBody User user) {
+    public ResponseEntity<Address> avroBinary(@RequestBody User user) {
+        return ResponseEntity.ok(user.getAddress());
+    }
+
+    @PostMapping(value = "/avroJson", consumes = AvroMediaType.AVRO_JSON_VALUE, produces = AvroMediaType.AVRO_JSON_VALUE)
+    public ResponseEntity<Address> avroJSON(@RequestBody User user) {
         return ResponseEntity.ok(user.getAddress());
     }
 }

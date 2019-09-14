@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-14T14:20:48.711+08:00
+ * @LastModified:2019-09-14T16:29:18.224+08:00
  * LGPL licence
  *
  */
@@ -16,6 +16,7 @@ import me.study.springcloud.io.AvroMessageConverter;
 import me.study.springcloud.services.ok.OKServicesApplication;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -25,24 +26,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.Objects;
 
 import static me.study.springcloud.io.AvroMediaType.AVRO_BINARY;
+import static me.study.springcloud.io.AvroMediaType.AVRO_JSON;
 
 @Slf4j
 public class AvroTests {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate binaryTemplate = new RestTemplate();
+    private RestTemplate jsonTemplate = new RestTemplate();
 
     @Test
     public void testUseAvroBinary() {
         ServerRunner.createAndRunServer(OKServicesApplication.class, "avro/ok_services.yml");
 
-        User user = User.newBuilder()
-                .setName(RandomStringUtils.randomAlphanumeric(10))
-                .setFavoriteColor(RandomStringUtils.randomAlphanumeric(10))
-                .setFavoriteNumber(RandomUtils.nextInt(0, 100))
-                .setAddress(Address.newBuilder().setName(RandomStringUtils.randomAlphanumeric(10)).build())
-                .build();
+        User user = createUser();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(AVRO_BINARY));
@@ -50,16 +49,62 @@ public class AvroTests {
         HttpEntity<User> entity = new HttpEntity<>(user, headers);
 
         ResponseEntity<Address> result =
-                restTemplate.exchange("http://localhost:8080/avroBinary", HttpMethod.POST, entity, Address.class);
+                binaryTemplate.exchange("http://localhost:8081/avroBinary", HttpMethod.POST, entity, Address.class);
+
+        Assert.assertEquals(user.getAddress().getName(), Objects.requireNonNull(result.getBody()).getName());
 
         log.info("stop");
     }
 
 
+    /**
+     * request json would be
+     * {
+     * "name": "Gr2qLmypLA",
+     * "favorite_number": {
+     * "int": 77
+     * },
+     * "favorite_color": {
+     * "string": "bTADsRvqad"
+     * },
+     * "address": {
+     * "me.study.springcloud.Address": {
+     * "name": "YARbMfTdzi"
+     * }
+     * }
+     * }
+     */
+    @Test
+    public void testUseAvroJson() {
+        ServerRunner.createAndRunServer(OKServicesApplication.class, "avro/ok_services.yml");
+        User user = createUser();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(AVRO_JSON));
+        headers.setContentType(AVRO_JSON);
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
+
+        ResponseEntity<Address> result =
+                jsonTemplate.exchange("http://localhost:8081/avroJson", HttpMethod.POST, entity, Address.class);
+
+        Assert.assertEquals(user.getAddress().getName(), Objects.requireNonNull(result.getBody()).getName());
+
+        log.info("stop");
+    }
+
+    private User createUser() {
+        return User.newBuilder()
+                .setName(RandomStringUtils.randomAlphanumeric(10))
+                .setFavoriteColor(RandomStringUtils.randomAlphanumeric(10))
+                .setFavoriteNumber(RandomUtils.nextInt(0, 100))
+                .setAddress(Address.newBuilder().setName(RandomStringUtils.randomAlphanumeric(10)).build())
+                .build();
+    }
+
+
     @Before
     public void setup() {
-        restTemplate.getMessageConverters().add(0, new AvroMessageConverter<>(
-                true,
-                AVRO_BINARY));
+        binaryTemplate.getMessageConverters().add(0, new AvroMessageConverter<>(true, AVRO_BINARY));
+        jsonTemplate.getMessageConverters().add(0, new AvroMessageConverter<>(false, AVRO_JSON));
     }
 }
