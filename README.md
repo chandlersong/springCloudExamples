@@ -18,7 +18,7 @@ when you build the project, please use **mvn install -DskipTests**
 - [Config examples](demo/config-demo/README.md)
 - [Security examples](demo/security-demo/README.md)
 - [Stream examples](demo/stream-demo/README.md)
-
+- [Stream examples](demo/miscellaneous-demo/README.md)
 
 
 # Extra configuration
