@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-22T12:52:17.045+08:00
+ * @LastModified:2019-09-22T20:58:44.587+08:00
  * LGPL licence
  *
  */
@@ -9,7 +9,6 @@
 package me.study.springcloud.services.ok;
 
 
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import me.study.springcloud.Address;
 import me.study.springcloud.User;
@@ -17,8 +16,6 @@ import me.study.springcloud.io.AvroMediaType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -45,14 +42,13 @@ public class OkController {
 
 
     @GetMapping(value = "/avroList", produces = AvroMediaType.AVRO_BINARY_VALUE)
-    public ResponseEntity<List<Address>> avroList() {
+    public ResponseEntity<Address[]> avroList() {
 
         Address[] results = new Address[2];
 
         results[0] = new Address("1");
         results[1] = new Address("2");
 
-
-        return ResponseEntity.ok(Lists.newArrayList(results));
+        return ResponseEntity.ok(results);
     }
 }

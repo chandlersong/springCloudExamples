@@ -1,15 +1,15 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-22T12:52:17.049+08:00
+ * @LastModified:2019-09-22T20:58:44.587+08:00
  * LGPL licence
  *
  */
 
 package me.study.springcloud.services.ok;
 
+import me.study.springcloud.io.AvroMessageArrayConverter;
 import me.study.springcloud.io.AvroMessageConverter;
-import me.study.springcloud.io.AvroMessageListConverter;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -48,8 +48,8 @@ public class OKServicesApplication {
     }
 
     @Bean
-    public AvroMessageListConverter createAvroListConverter() {
-        return new AvroMessageListConverter(
+    public AvroMessageArrayConverter<? extends SpecificRecordBase> createAvroListConverter() {
+        return new AvroMessageArrayConverter<>(
                 true,
                 AVRO_BINARY);
     }

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-22T12:52:17.041+08:00
+ * @LastModified:2019-09-22T20:58:44.571+08:00
  * LGPL licence
  *
  */
@@ -12,8 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.springcloud.Address;
 import me.study.springcloud.User;
+import me.study.springcloud.io.AvroMessageArrayConverter;
 import me.study.springcloud.io.AvroMessageConverter;
-import me.study.springcloud.io.AvroMessageListConverter;
 import me.study.springcloud.services.ok.OKServicesApplication;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -61,16 +61,18 @@ public class AvroTests {
 
 
     @Test
-    public void testUseAvroBinaryList() {
+    public void testUseAvroBinaryArray() {
         ServerRunner.createAndRunServer(OKServicesApplication.class, "avro/ok_services.yml");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(AVRO_BINARY));
         HttpEntity<Object> entity = new HttpEntity<>(headers);
-        ResponseEntity<Address> result =
-                binaryTemplate.exchange("http://localhost:8080/avroList", HttpMethod.GET, entity, Address.class);
+        ResponseEntity<Address[]> result =
+                binaryTemplate.exchange("http://localhost:8080/avroList", HttpMethod.GET, entity, Address[].class);
 
-
+        Address[] addresses = result.getBody();
+        assert addresses != null;
+        Assert.assertEquals(2, addresses.length);
         log.info("stop");
     }
 
@@ -123,7 +125,7 @@ public class AvroTests {
     @Before
     public void setup() {
         List<HttpMessageConverter<?>> messageConverters = binaryTemplate.getMessageConverters();
-        messageConverters.add(0, new AvroMessageListConverter(true, AVRO_BINARY));
+        messageConverters.add(0, new AvroMessageArrayConverter<>(true, AVRO_BINARY));
         messageConverters.add(1, new AvroMessageConverter<>(true, AVRO_BINARY));
         jsonTemplate.getMessageConverters().add(0, new AvroMessageConverter<>(false, AVRO_JSON));
     }
