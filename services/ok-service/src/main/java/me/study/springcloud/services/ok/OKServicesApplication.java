@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-14T14:20:48.723+08:00
+ * @LastModified:2019-09-22T12:52:17.049+08:00
  * LGPL licence
  *
  */
@@ -9,6 +9,7 @@
 package me.study.springcloud.services.ok;
 
 import me.study.springcloud.io.AvroMessageConverter;
+import me.study.springcloud.io.AvroMessageListConverter;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -17,14 +18,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static me.study.springcloud.io.AvroMediaType.AVRO_BINARY;
+import static me.study.springcloud.io.AvroMediaType.AVRO_JSON;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @Configuration
-public class OKServicesApplication implements WebMvcConfigurer {
+public class OKServicesApplication {
 
     @Value("${ok-service-meta.clientId:hello}")
     private String clientId;
@@ -47,9 +48,23 @@ public class OKServicesApplication implements WebMvcConfigurer {
     }
 
     @Bean
-    public AvroMessageConverter<SpecificRecordBase> createAvroConverter() {
+    public AvroMessageListConverter createAvroListConverter() {
+        return new AvroMessageListConverter(
+                true,
+                AVRO_BINARY);
+    }
+
+    @Bean
+    public AvroMessageConverter<? extends SpecificRecordBase> createAvroBinaryConverter() {
         return new AvroMessageConverter<>(
                 true,
                 AVRO_BINARY);
+    }
+
+    @Bean
+    public AvroMessageConverter<? extends SpecificRecordBase> createAvroJsonConverter() {
+        return new AvroMessageConverter<>(
+                false,
+                AVRO_JSON);
     }
 }
