@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2018
+  ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-11-29T21:17:02.201+08:00
+  ~ @LastModified:2019-09-28T23:01:12.904+08:00
   ~ LGPL licence
   ~
   -->
@@ -33,6 +33,16 @@
         <dependency>
             <groupId>me.study.springcloud</groupId>
             <artifactId>hystrix-feign-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>reactive-feign-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>reactive-ok-service</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
