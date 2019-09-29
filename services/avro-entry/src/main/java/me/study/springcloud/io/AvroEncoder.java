@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-29T23:03:00.276+08:00
+ * @LastModified:2019-09-30T06:32:20.961+08:00
  * LGPL licence
  *
  */
@@ -19,8 +19,8 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.util.MimeType;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
@@ -37,13 +37,14 @@ public class AvroEncoder<T extends SpecificRecordBase> implements Encoder<T> {
     }
 
     @Override
-    public Flux<DataBuffer> encode(Publisher<? extends T> inputStream, DataBufferFactory bufferFactory, ResolvableType elementType, MimeType mimeType, Map<String, Object> hints) {
+    @Nonnull
+    public Flux<DataBuffer> encode(@Nonnull Publisher<? extends T> inputStream, @Nonnull DataBufferFactory bufferFactory, @Nonnull ResolvableType elementType, MimeType mimeType, Map<String, Object> hints) {
         return Flux
                 .from(inputStream)
-                .map(message -> encodeMessage(message, bufferFactory, !(inputStream instanceof Mono)));
+                .map(message -> encodeMessage(message, bufferFactory));
     }
 
-    private DataBuffer encodeMessage(T message, DataBufferFactory bufferFactory, boolean streaming) {
+    private DataBuffer encodeMessage(T message, DataBufferFactory bufferFactory) {
         DataBuffer buffer = bufferFactory.allocateBuffer();
         OutputStream outputStream = buffer.asOutputStream();
         try {
@@ -58,6 +59,7 @@ public class AvroEncoder<T extends SpecificRecordBase> implements Encoder<T> {
     }
 
     @Override
+    @Nonnull
     public List<MimeType> getEncodableMimeTypes() {
         return Collections.singletonList(AvroMediaType.AVRO_BINARY);
     }

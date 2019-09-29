@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-29T23:03:00.305+08:00
+ * @LastModified:2019-09-30T06:32:20.977+08:00
  * LGPL licence
  *
  */
@@ -60,10 +60,12 @@ public class ReactiveDemos {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(AVRO_BINARY));
         headers.setContentType(AVRO_BINARY);
-        HttpEntity<User> entity = new HttpEntity<>(createUser(), headers);
+        User user = createUser();
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
 
         ResponseEntity<Address> result =
-                binaryTemplate.exchange("http://localhost:8080/testAvro", HttpMethod.POST, entity, Address.class);
+                binaryTemplate.exchange("http://localhost:8081/testAvro", HttpMethod.POST, entity, Address.class);
+        log.info("send: {}", user);
         log.info("status code:,{}", result.getStatusCode().value());
         log.info("request get:,{}", Objects.requireNonNull(result.getBody()).getName());
         log.info("stop");
