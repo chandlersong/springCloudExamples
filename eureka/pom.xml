@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2018
+  ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2018-11-29T21:17:02.182+08:00
+  ~ @LastModified:2019-09-29T23:03:00.279+08:00
   ~ LGPL licence
   ~
   -->
@@ -26,4 +26,10 @@
     </modules>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 </project>

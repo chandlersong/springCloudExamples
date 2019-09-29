@@ -1,0 +1,17 @@
+server:
+  port: 8081
+logging:
+  config: classpath:logback.xml
+
+spring:
+  application:
+    name: ReactiveOKService
+  jmx:
+    default-domain: Reactive_OKService_feign_demo_client1
+
+eureka:
+  client:
+    enabled: false
+
+ok-service-meta:
+  clientId: client1

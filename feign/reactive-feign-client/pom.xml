@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-09-28T23:01:12.917+08:00
+  ~ @LastModified:2019-09-29T23:03:00.282+08:00
   ~ LGPL licence
   ~
   -->
@@ -50,6 +50,13 @@
             <groupId>com.playtika.reactivefeign</groupId>
             <artifactId>feign-reactor-spring-configuration</artifactId>
             <version>${feign-reactor.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>me.study.springcloud</groupId>
+            <artifactId>avro-entry</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -7,6 +7,5 @@ spring:
   jmx:
     default-domain: reactive_feign_server
 
-
 reactive:
   remote: ReactiveOKService
