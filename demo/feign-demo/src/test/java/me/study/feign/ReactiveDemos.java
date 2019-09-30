@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-30T06:32:20.977+08:00
+ * @LastModified:2019-09-30T21:52:06.649+08:00
  * LGPL licence
  *
  */
@@ -9,36 +9,30 @@
 package me.study.feign;
 
 import lombok.extern.slf4j.Slf4j;
+import me.demo.springcloud.utils.AvroWebClient;
 import me.demo.springcloud.utils.RestRequest;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.reactivefeign.ReactiveFeignApplication;
 import me.study.springcloud.Address;
 import me.study.springcloud.User;
 import me.study.springcloud.eureka.server.EurekaServerApplication;
-import me.study.springcloud.io.AvroMessageArrayConverter;
-import me.study.springcloud.io.AvroMessageConverter;
 import me.study.springcloud.services.ok.ReactiveOKServiceApplication;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
-
-import static me.study.springcloud.io.AvroMediaType.AVRO_BINARY;
 
 @Slf4j
 public class ReactiveDemos {
 
-    private RestTemplate binaryTemplate = new RestTemplate();
+
+    private WebClient binaryClient;
 
     @Test
     public void testHelloWorld() throws InterruptedException {
@@ -57,17 +51,17 @@ public class ReactiveDemos {
 //        ServerRunner.createAndRunServer(ReactiveOKServiceApplication.class,
 //                                        "reactive/reactive_ok_services_client_without_discovery.yml");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(AVRO_BINARY));
-        headers.setContentType(AVRO_BINARY);
         User user = createUser();
-        HttpEntity<User> entity = new HttpEntity<>(user, headers);
 
-        ResponseEntity<Address> result =
-                binaryTemplate.exchange("http://localhost:8081/testAvro", HttpMethod.POST, entity, Address.class);
+        Mono<Address> data = binaryClient
+                .method(HttpMethod.POST)
+                .uri("/testAvro")
+                .body(BodyInserters.fromObject(user))
+                .retrieve()
+                .bodyToMono(Address.class);
+
         log.info("send: {}", user);
-        log.info("status code:,{}", result.getStatusCode().value());
-        log.info("request get:,{}", Objects.requireNonNull(result.getBody()).getName());
+        log.info("webclient result,{}", Objects.requireNonNull(data.block()).getName());
         log.info("stop");
     }
 
@@ -80,9 +74,7 @@ public class ReactiveDemos {
 
     @Before
     public void setup() {
-        List<HttpMessageConverter<?>> messageConverters = binaryTemplate.getMessageConverters();
-        messageConverters.add(0, new AvroMessageArrayConverter<>(true, AVRO_BINARY));
-        messageConverters.add(1, new AvroMessageConverter<>(true, AVRO_BINARY));
+        binaryClient = AvroWebClient.createAvroWebClient("http://localhost:8080");
     }
 
     private User createUser() {
