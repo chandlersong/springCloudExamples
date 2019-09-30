@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-30T06:32:20.961+08:00
+ * @LastModified:2019-09-30T20:55:36.033+08:00
  * LGPL licence
  *
  */
@@ -52,6 +52,7 @@ public class AvroEncoder<T extends SpecificRecordBase> implements Encoder<T> {
             DatumWriter<T> datumWriter = new SpecificDatumWriter<>(message.getSchema());
             datumWriter.write(message, encoder);
             encoder.flush();
+            outputStream.close();
             return buffer;
         } catch (IOException ex) {
             throw new IllegalStateException("Unexpected I/O error while writing to data buffer", ex);
