@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-30T21:52:06.649+08:00
+ * @LastModified:2019-09-30T22:14:20.849+08:00
  * LGPL licence
  *
  */
@@ -24,9 +24,11 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
 
 @Slf4j
 public class ReactiveDemos {
@@ -62,6 +64,28 @@ public class ReactiveDemos {
 
         log.info("send: {}", user);
         log.info("webclient result,{}", Objects.requireNonNull(data.block()).getName());
+        log.info("stop");
+    }
+
+
+    @Test
+    public void testAvroFlux() throws InterruptedException {
+
+
+        Flux<Address> data = binaryClient
+                .method(HttpMethod.GET)
+                .uri("/greetingFlux")
+                .retrieve()
+                .bodyToFlux(Address.class);
+
+
+        CountDownLatch latch = new CountDownLatch(3);
+        data.subscribe(addr -> {
+            log.info("receive address {}", addr.getName());
+            latch.countDown();
+        });
+
+        latch.await();
         log.info("stop");
     }
 

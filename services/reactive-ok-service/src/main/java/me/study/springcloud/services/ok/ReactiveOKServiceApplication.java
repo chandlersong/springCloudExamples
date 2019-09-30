@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-29T23:03:00.311+08:00
+ * @LastModified:2019-09-30T22:14:20.853+08:00
  * LGPL licence
  *
  */
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -42,6 +43,15 @@ public class ReactiveOKServiceApplication {
         return Mono.just(new Address(RandomStringUtils.randomAlphabetic(10)));
     }
 
+    @GetMapping(value = "/greetingFlux", produces = AvroMediaType.AVRO_BINARY_VALUE)
+    public Flux<Address> greetingAvroFlux() {
+
+        return Flux.fromArray(new Address[]{
+                new Address(RandomStringUtils.randomAlphabetic(10)),
+                new Address(RandomStringUtils.randomAlphabetic(10)),
+                new Address(RandomStringUtils.randomAlphabetic(10))
+        });
+    }
 
     @PostMapping(value = "/testAvro", consumes = AvroMediaType.AVRO_BINARY_VALUE, produces = AvroMediaType.AVRO_BINARY_VALUE)
     public Mono<Address> testAvro(@RequestBody User user) {
