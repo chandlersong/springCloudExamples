@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-30T22:14:20.853+08:00
+ * @LastModified:2019-10-01T21:16:36.808+08:00
  * LGPL licence
  *
  */
@@ -40,6 +40,7 @@ public class ReactiveOKServiceApplication {
 
     @GetMapping(value = "/greetingAvro", produces = AvroMediaType.AVRO_BINARY_VALUE)
     public Mono<Address> greetingAvro() {
+        log.info("greetingAvro executed");
         return Mono.just(new Address(RandomStringUtils.randomAlphabetic(10)));
     }
 

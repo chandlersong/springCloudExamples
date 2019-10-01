@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-30T22:14:20.849+08:00
+ * @LastModified:2019-10-01T21:16:36.798+08:00
  * LGPL licence
  *
  */
@@ -10,7 +10,6 @@ package me.study.feign;
 
 import lombok.extern.slf4j.Slf4j;
 import me.demo.springcloud.utils.AvroWebClient;
-import me.demo.springcloud.utils.RestRequest;
 import me.demo.springcloud.utils.ServerRunner;
 import me.study.reactivefeign.ReactiveFeignApplication;
 import me.study.springcloud.Address;
@@ -30,19 +29,43 @@ import reactor.core.publisher.Mono;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * all the test please run the service manually
+ * ReactiveFeignApplication
+ * ReactiveOKServiceApplication
+ * EurekaServerApplication
+ */
 @Slf4j
 public class ReactiveDemos {
 
 
-    private WebClient binaryClient;
+    private WebClient okClient;
+    private WebClient feignClient;
 
     @Test
     public void testHelloWorld() throws InterruptedException {
         log.info("server port:{}", "8080");
 
-        startServer();
-        //log.info("request get:,{}", RestRequest.get("/greeting"));
-        log.info("request get:,{}", RestRequest.get("/greetingAvro"));
+        Mono<String> result = WebClient.create("http://localhost:8080").get()
+                .uri("/greetingAvro")
+                .retrieve()
+                .bodyToMono(String.class);
+
+        log.info("request get:,{}", result.block());
+        log.info("stop");
+    }
+
+    @Test
+    public void testAvroGet() {
+
+
+        Mono<Address> data = okClient
+                .method(HttpMethod.GET)
+                .uri("/greetingAvro")
+                .retrieve()
+                .bodyToMono(Address.class);
+
+        log.info("webclient result,{}", Objects.requireNonNull(data.block()).getName());
         log.info("stop");
     }
 
@@ -50,12 +73,9 @@ public class ReactiveDemos {
     @Test
     public void testAvro() {
 
-//        ServerRunner.createAndRunServer(ReactiveOKServiceApplication.class,
-//                                        "reactive/reactive_ok_services_client_without_discovery.yml");
-
         User user = createUser();
 
-        Mono<Address> data = binaryClient
+        Mono<Address> data = okClient
                 .method(HttpMethod.POST)
                 .uri("/testAvro")
                 .body(BodyInserters.fromObject(user))
@@ -72,7 +92,7 @@ public class ReactiveDemos {
     public void testAvroFlux() throws InterruptedException {
 
 
-        Flux<Address> data = binaryClient
+        Flux<Address> data = okClient
                 .method(HttpMethod.GET)
                 .uri("/greetingFlux")
                 .retrieve()
@@ -98,7 +118,8 @@ public class ReactiveDemos {
 
     @Before
     public void setup() {
-        binaryClient = AvroWebClient.createAvroWebClient("http://localhost:8080");
+        okClient = AvroWebClient.createAvroWebClient("http://localhost:8081");
+        feignClient = AvroWebClient.createAvroWebClient("http://localhost:7080");
     }
 
     private User createUser() {

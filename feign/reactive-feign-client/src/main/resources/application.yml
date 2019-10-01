@@ -7,6 +7,15 @@ spring:
   jmx:
     default-domain: reactive_feign_server
 
+feign:
+  hystrix:
+    enabled: true
 
 reactive:
   remote: ReactiveOKService
+logging:
+  level:
+    com.springframework.cloud: warn
+    com.netflix.discovery: warn
+    com.netflix.hystrix: debug
+    org.springframework.web: debug

@@ -1,19 +1,20 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-09-29T23:03:00.313+08:00
+ * @LastModified:2019-10-01T21:16:36.811+08:00
  * LGPL licence
  *
  */
 
 package me.study.reactivefeign;
 
-import me.study.springcloud.Address;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @RestController
 public class ReactorController {
 
@@ -25,8 +26,8 @@ public class ReactorController {
         return service.greeting();
     }
 
-    @GetMapping("/greetingAvro")
+    @GetMapping(value = "/greetingAvro")
     public Mono<String> greetingAvro() {
-        return service.greetingAvro().map(Address::getName);
+        return Mono.just(service.greetingAvro().getName());
     }
 }

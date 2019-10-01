@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ReactiveOKService
+  jmx:
+    default-domain: Reactive_OKService_feign_demo_client1
+
+eureka:
+  client:
+    enabled: true
+
+ok-service-meta:
+  clientId: client1
