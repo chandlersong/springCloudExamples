@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-10-01T21:16:36.798+08:00
+ * @LastModified:2019-10-01T22:29:36.532+08:00
  * LGPL licence
  *
  */
@@ -50,6 +50,19 @@ public class ReactiveDemos {
                 .uri("/greetingAvro")
                 .retrieve()
                 .bodyToMono(String.class);
+
+        log.info("request get:,{}", result.block());
+        log.info("stop");
+    }
+
+    @Test
+    public void testWebClient() throws InterruptedException {
+        log.info("server port:{}", "8080");
+
+        Mono<Address> result = feignClient.get()
+                .uri("/greetingWebClient")
+                .retrieve()
+                .bodyToMono(Address.class);
 
         log.info("request get:,{}", result.block());
         log.info("stop");

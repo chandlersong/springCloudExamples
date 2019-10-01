@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2019
   ~ @Author:chandler song, email:chandler605@outlook.com
-  ~ @LastModified:2019-10-01T21:16:36.790+08:00
+  ~ @LastModified:2019-10-01T22:29:36.528+08:00
   ~ LGPL licence
   ~
   -->
@@ -22,11 +22,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-reactive-wrappers</artifactId>
-            <version>10.1.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
@@ -35,7 +30,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
         <dependency>
             <groupId>me.study.springcloud</groupId>
             <artifactId>avro-entry</artifactId>
