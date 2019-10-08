@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-10-01T21:16:36.808+08:00
+ * @LastModified:2019-10-08T21:55:09.599+08:00
  * LGPL licence
  *
  */
@@ -58,5 +58,14 @@ public class ReactiveOKServiceApplication {
     public Mono<Address> testAvro(@RequestBody User user) {
         log.info("receive user name:{}", user.getName());
         return Mono.just(user.getAddress());
+    }
+
+    @GetMapping(value = "/testAvroError", produces = AvroMediaType.AVRO_BINARY_VALUE)
+    public Mono<Address> testAvroError() {
+        log.info("testAvroError is executed");
+        return Mono.error(new GlobalErrorException());
+    }
+
+    public static class GlobalErrorException extends RuntimeException {
     }
 }
