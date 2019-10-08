@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-10-01T22:29:36.532+08:00
+ * @LastModified:2019-10-08T21:55:09.589+08:00
  * LGPL licence
  *
  */
@@ -47,9 +47,9 @@ public class ReactiveDemos {
         log.info("server port:{}", "8080");
 
         Mono<String> result = WebClient.create("http://localhost:8080").get()
-                .uri("/greetingAvro")
-                .retrieve()
-                .bodyToMono(String.class);
+                                       .uri("/greetingAvro")
+                                       .retrieve()
+                                       .bodyToMono(String.class);
 
         log.info("request get:,{}", result.block());
         log.info("stop");
@@ -60,9 +60,9 @@ public class ReactiveDemos {
         log.info("server port:{}", "8080");
 
         Mono<Address> result = feignClient.get()
-                .uri("/greetingWebClient")
-                .retrieve()
-                .bodyToMono(Address.class);
+                                          .uri("/greetingWebClient")
+                                          .retrieve()
+                                          .bodyToMono(Address.class);
 
         log.info("request get:,{}", result.block());
         log.info("stop");
@@ -82,6 +82,20 @@ public class ReactiveDemos {
         log.info("stop");
     }
 
+    @Test
+    public void testAvroGreetingError() {
+
+
+        feignClient
+                .method(HttpMethod.GET)
+                .uri("/greetingError")
+                .retrieve()
+                .bodyToMono(Address.class)
+                .doOnError(e -> log.warn("receive error, e", e))
+                .block();
+
+        log.info("stop");
+    }
 
     @Test
     public void testAvro() {
@@ -132,15 +146,15 @@ public class ReactiveDemos {
     @Before
     public void setup() {
         okClient = AvroWebClient.createAvroWebClient("http://localhost:8081");
-        feignClient = AvroWebClient.createAvroWebClient("http://localhost:7080");
+        feignClient = AvroWebClient.createAvroWebClient("http://localhost:8080");
     }
 
     private User createUser() {
         return User.newBuilder()
-                .setName(RandomStringUtils.randomAlphanumeric(10))
-                .setFavoriteColor(RandomStringUtils.randomAlphanumeric(10))
-                .setFavoriteNumber(RandomUtils.nextInt(0, 100))
-                .setAddress(Address.newBuilder().setName(RandomStringUtils.randomAlphanumeric(10)).build())
-                .build();
+                   .setName(RandomStringUtils.randomAlphanumeric(10))
+                   .setFavoriteColor(RandomStringUtils.randomAlphanumeric(10))
+                   .setFavoriteNumber(RandomUtils.nextInt(0, 100))
+                   .setAddress(Address.newBuilder().setName(RandomStringUtils.randomAlphanumeric(10)).build())
+                   .build();
     }
 }

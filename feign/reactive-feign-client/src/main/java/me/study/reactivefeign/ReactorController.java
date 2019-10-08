@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019
  * @Author:chandler song, email:chandler605@outlook.com
- * @LastModified:2019-10-01T22:29:36.539+08:00
+ * @LastModified:2019-10-08T21:55:09.605+08:00
  * LGPL licence
  *
  */
@@ -40,5 +40,15 @@ public class ReactorController {
     @GetMapping(value = "/greetingWebClient", produces = AvroMediaType.AVRO_BINARY_VALUE)
     public Mono<Address> greetingWebClient() {
         return webClientBuilder.build().get().uri("/greetingAvro").retrieve().bodyToMono(Address.class);
+    }
+
+    @GetMapping(value = "/greetingError", produces = AvroMediaType.AVRO_BINARY_VALUE)
+    public Mono<Address> greetingWebClientError() {
+        return webClientBuilder.build()
+                               .get()
+                               .uri("/testAvroError")
+                               .retrieve()
+                               .bodyToMono(Address.class)
+                               .doOnError(e -> log.warn("error!", e));
     }
 }
