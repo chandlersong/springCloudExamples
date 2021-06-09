@@ -55,6 +55,7 @@
             <groupId>me.study.springcloud</groupId>
             <artifactId>kafka-stream-processor</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>me.study.springcloud</groupId>
