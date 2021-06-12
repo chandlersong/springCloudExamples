@@ -20,15 +20,19 @@
     <artifactId>kafka-stream</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>kafka-stream-simple-producer</module>
-        <module>kafka-stream-simple-consumer</module>
-        <module>kafka-custom-binding</module>
-        <module>kafka-producer</module>
-        <module>kafka-consumer</module>
-        <module>kafka-stream-processor</module>
+        <module>simple-kafka-producer</module>
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

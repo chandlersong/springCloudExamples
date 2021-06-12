@@ -20,143 +20,15 @@
     <artifactId>demo</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>eureka-demo</module>
-        <module>hystrix-demo</module>
-        <module>ribbon-demo</module>
-        <module>zuul-demo</module>
-        <module>feign-demo</module>
-        <module>config-demo</module>
-        <module>security-demo</module>
         <module>stream-demo</module>
-        <module>miscellaneous-demo</module>
     </modules>
 
     <build>
         <resources>
-            <resource>
-                <directory>../configurations/logback</directory>
-            </resource>
             <resource>
                 <directory>src/main/resources/springboot</directory>
             </resource>
         </resources>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>protobuf-entry</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>simple-eureka-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>simple-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.study.springcloud</groupId>
-            <artifactId>eureka-lifecycle-client</artifactId>
-        </dependency>
-    </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>oauth2-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>oauth2-resource-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>jwt-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>jwt-resource-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-config-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-config-client</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>zuul</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-zuul-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>ribbon-simple</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-eureka-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-eureka-client</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>eureka-lifecycle-client</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>hystrix-simple</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>ok-service</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>turbine-simple</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>simple-feign-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>hystrix-feign-client</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.study.springcloud</groupId>
-                <artifactId>turbine-eureka-server</artifactId>
-                <version>${me.study.springcloud}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    stream:
+      function.definition: log;sayHi
+      bindings:
+        log-in-0:
+          destination: log
+        sayHi-out-0:
+          destination: log

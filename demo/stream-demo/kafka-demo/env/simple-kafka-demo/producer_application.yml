@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    stream:
+      function.definition: log;sayHi
+      bindings:
+        log-in-0:
+          destination: logA
+        sayHi-out-0:
+          destination: logA
+spring.cloud.stream.kafka.binder:
+  brokers: broker:9092
