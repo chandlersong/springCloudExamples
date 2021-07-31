@@ -1,0 +1,16 @@
+spring.cloud.stream.function.definition: simpleAvro
+spring.cloud.stream.bindings.simpleAvro-in-0:
+  destination: avroTopic
+  group: inTopic
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          consumer-properties:
+            client:
+              id: abc
+              rack: test
+            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            schema.registry.url: http://localhost:8081
+            specific.avro.reader: true

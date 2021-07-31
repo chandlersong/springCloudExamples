@@ -1,0 +1,11 @@
+#1 hello world case
+GET http://localhost:8082/hello?name=abc
+Accept: application/json
+
+###
+#2 use stream bridge to send data
+GET http://localhost:8082/steamBridge?name=abc
+Accept: application/json
+
+###
+
