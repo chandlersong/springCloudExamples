@@ -98,7 +98,8 @@
                     <version>${jib.version}</version>
                     <configuration>
                         <from>
-                            <image>openjdk:8-jdk-slim</image>
+                            <image>openjdk@sha256:32a96bf2d50866515e8295f3530e5cc93fb402aef6c646956fb9a311c0edb876
+                            </image>
                         </from>
                         <extraDirectories>
                             <paths>
