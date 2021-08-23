@@ -22,6 +22,7 @@
     <modules>
         <module>simple-kafka-producer</module>
         <module>simple-kafka-consumer</module>
+        <module>custom-transformer</module>
     </modules>
 
 

@@ -1,0 +1,18 @@
+{
+  "name":   "jdbc-sink",
+  "config": {
+    "connector.class":                     "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "key.converter":                       "io.confluent.connect.avro.AvroConverter",
+    "value.converter":                     "io.confluent.connect.avro.AvroConverter",
+    "topics":                              "avroTopic",
+    "connection.url":                      "jdbc:mysql://db:3306/connect",
+    "connection.user":                     "connect",
+    "connection.password":                 "connect",
+    "dialect.name":                        "MySqlDatabaseDialect",
+    "table.name.format":                   "${env:/etc/chandler/a.properties:mytable}",
+    "auto.create":                         "true",
+    "auto.evolve":                         "true",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "key.converter.schema.registry.url":   "http://schema-registry:8081"
+  }
+}
