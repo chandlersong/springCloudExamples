@@ -1,0 +1,27 @@
+spring:
+  jmx:
+    enabled: false
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+      routes:
+        - id: websocket_test
+          uri: ws://localhost:9000
+          order: 9000
+          predicates:
+            - Path=/echo
+        # =====================================
+        - id: simple
+          uri: http://127.0.0.1:8081
+          order: 1
+          predicates:
+            - Path=/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+    reactor.netty: DEBUG
