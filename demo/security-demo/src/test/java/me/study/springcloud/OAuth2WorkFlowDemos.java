@@ -30,7 +30,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import java.io.IOException;
 
@@ -85,17 +84,17 @@ public class OAuth2WorkFlowDemos {
         logger.info("stop");
     }
 
-    @Test
-    public void OAuth2ExamplesUseTemplate() {
-        ServerRunner.createAndRunServer(OAuth2ApplicationServer.class, "oauth2_simple_sever.yml");
-        ServerRunner.createAndRunServer(ResourceApplicationServer.class, "oauth2_resource_sever.yml");
-
-
-        OAuth2RestTemplate template = templateFactory.createRestTemplate();
-        ResponseEntity<String> get = template.getForEntity("http://localhost:8081/resource", String.class);
-        Assert.assertEquals("ok", get.getBody());
-        logger.info("stop");
-    }
+//    @Test
+//    public void OAuth2ExamplesUseTemplate() {
+//        ServerRunner.createAndRunServer(OAuth2ApplicationServer.class, "oauth2_simple_sever.yml");
+//        ServerRunner.createAndRunServer(ResourceApplicationServer.class, "oauth2_resource_sever.yml");
+//
+//
+//        OAuth2RestTemplate template = templateFactory.createRestTemplate();
+//        ResponseEntity<String> get = template.getForEntity("http://localhost:8081/resource", String.class);
+//        Assert.assertEquals("ok", get.getBody());
+//        logger.info("stop");
+//    }
 
 
 

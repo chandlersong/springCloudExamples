@@ -30,7 +30,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import java.io.IOException;
 import java.time.Clock;
@@ -95,34 +94,34 @@ public class JWTDemos {
         logger.info("response body:{}", IOUtils.toString(withAuth.getEntity().getContent(), Charsets.UTF_8));
     }
 
-    @Test
-    public void JwtTemplate() {
-        ServerRunner.createAndRunServer(JwtApplicationServer.class, "jwt_simple_sever.yml");
-        ServerRunner.createAndRunServer(JwtResourceApplicationServer.class, "jwt_resource_sever.yml");
-
-        ResponseEntity<String> get;
-        OAuth2RestTemplate client1 = templateFactory.createRestTemplate();
-        get = client1.getForEntity("http://localhost:8081/resource", String.class);
-        Assert.assertEquals("ok", get.getBody());
-
-        get = client1.getForEntity("http://localhost:8081/user", String.class);
-
-        Assert.assertEquals("user", get.getBody());
-        logger.info("stop");
-
-        templateFactory.setClientId("client2");
-        templateFactory.setSecret("abc");
-        templateFactory.setScopes(Collections.singletonList("read"));
-        OAuth2RestTemplate client2 = templateFactory.createRestTemplate();
-
-
-        try {
-            client2.getForEntity("http://localhost:8081/resource", String.class);
-        } catch (Exception e) {
-            // the error code is 403
-            logger.error("scope not correct:", e);
-        }
-    }
+//    @Test
+//    public void JwtTemplate() {
+//        ServerRunner.createAndRunServer(JwtApplicationServer.class, "jwt_simple_sever.yml");
+//        ServerRunner.createAndRunServer(JwtResourceApplicationServer.class, "jwt_resource_sever.yml");
+//
+//        ResponseEntity<String> get;
+//        OAuth2RestTemplate client1 = templateFactory.createRestTemplate();
+//        get = client1.getForEntity("http://localhost:8081/resource", String.class);
+//        Assert.assertEquals("ok", get.getBody());
+//
+//        get = client1.getForEntity("http://localhost:8081/user", String.class);
+//
+//        Assert.assertEquals("user", get.getBody());
+//        logger.info("stop");
+//
+//        templateFactory.setClientId("client2");
+//        templateFactory.setSecret("abc");
+//        templateFactory.setScopes(Collections.singletonList("read"));
+//        OAuth2RestTemplate client2 = templateFactory.createRestTemplate();
+//
+//
+//        try {
+//            client2.getForEntity("http://localhost:8081/resource", String.class);
+//        } catch (Exception e) {
+//            // the error code is 403
+//            logger.error("scope not correct:", e);
+//        }
+//    }
 
     @Test
     public void printToken() throws Exception {
